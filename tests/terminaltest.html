@@ -1,0 +1,88 @@
+<html>
+<head>
+
+	<style type="text/css" title="AppleStyle">
+		body 
+		{
+			margin: 0px;
+			background-color: transparent;
+		}
+		
+		.KeyPad
+		{
+			width: 267px;
+			margin-bottom: 0px;
+		}
+
+		/* .box 
+		{
+			border: 0px;
+			margin: 10px;
+			padding: 5px 5px 5px 5px;
+			background: yellow;
+			width: 800px;
+		} */
+		
+		#neurostdout
+		{
+			border-width: 0px; 
+			height: 600px; 
+			width: 800px; 
+			background-color: black; 
+			color: rgb(54, 217, 16); 
+			font-size: 0.9em; 
+			font-family: monaco, courier, monospaced, serif; 
+			cursor: text; 
+			/* margin-left: 10px; */
+			padding: 3px;
+			text-align: left; 
+			overflow: scroll;
+		}
+	</style>
+	
+	<script type="text/javascript" language="javascript" src="../js/util/Log.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/util/Collections.js"></script>
+	
+	<script type="text/javascript" language="javascript" src="../js/util/BrowserSniffer.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/ui/Mouse.js"></script>
+	
+	<script type="text/javascript" language="javascript" src="../js/ui/EventManager.js"></script>
+		
+	<script type="text/javascript" language="javascript" src="../js/xml/XmlSax.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/xml/XmlW3CDom.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/xml/XmlDocument.js"></script>
+	
+	<script type="text/javascript" language="javascript" src="../js/io/Gateway.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/io/RemoteObject.js"></script>
+	
+	<script type="text/javascript" language="javascript" src="../js/util/Output.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/util/Console.js"></script>
+	
+	<script language="javascript" type="text/javascript">
+		DEBUG = true;
+		log.init();
+		
+		function initShell()
+		{
+			var rootcon = new Console();
+			neuro_addKeyPressListener(rootcon.keyListener);
+			neuro_addKeyUpListener(rootcon.keyUpListener);
+			neuro_addKeyDownListener(rootcon.keyDownListener);
+			
+			neuro_Runner("");	
+		}
+	</script>
+	
+</head>
+	<body onload="initShell();">
+
+	<div class="box">
+		<form name="Terminal" action="">
+		<div class="KeyPad">
+			<div name="neurostdout" id="neurostdout">Welcome to Neuromancer!</div>
+		</div>
+		</form>
+	</div>
+	
+	</body>
+</html>

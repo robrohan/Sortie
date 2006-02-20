@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Basic Test</title>
+		
+		<script language="javascript" type="text/javascript" src="../js/util/Log.js"></script>
+		<script language="javascript" type="text/javascript" src="../js/util/Collections.js"></script>
+		<script language="javascript" type="text/javascript" src="../js/util/BrowserSniffer.js"></script>
+
+		<script language="javascript" type="text/javascript" src="../js/xml/XmlSax.js"></script>
+		<script language="javascript" type="text/javascript" src="../js/xml/XmlW3CDom.js"></script>
+		<script language="javascript" type="text/javascript" src="../js/xml/XmlDocument.js"></script>
+
+		<script language="javascript" type="text/javascript" src="../js/io/Gateway.js"></script>
+		
+		<script type="text/javascript" language="javascript">			
+			function doTest()
+			{	
+				DEBUG = true;
+				log.init();
+			
+				for(var q=0; q<2; q++) 
+					log.info(q);
+				
+				httpcon = new HTTPConnectFactory().getInstance();
+				remote = new JSRemote(httpcon,true);
+	
+				xmldoc = new XMLDocumentFactory().getInstance();
+				
+				function myHandler(e)
+				{
+					xmldoc.loadXML(e);
+					elements = xmldoc.getElementsByTagNameNS("http://neuromancer.sf.net/tests","MyElement");
+					elements.item(0).setAttribute("editable","** SET THIS TO THIS **");
+					
+					document.getElementById("showloaded").value = xmldoc.toString();
+				}
+				remote.doGetRequest("form.xml",myHandler);
+			}
+		</script>
+	</head>
+	
+	<body onload="doTest();">
+		<p>This page tests loading of an XML document, parsing it into a DOM, 
+		setting	an Attribute of the DOM, and the logger.</p>
+		
+		<p><b>Note:</b> the logger will use a popup window so your popup blocker
+		will stop it from showing up.</p> 
+		<h4>Loaded: </h4>
+		<textarea id="showloaded" cols="80" rows="25"></textarea>
+	</body>
+</html>

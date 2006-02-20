@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>untitled</title>
+	<script language="javascript" type="text/javascript" src="../js/search/BinarySearch.js"></script>
+	<script language="javascript" type="text/javascript">
+		function test1()
+		{
+			var word = "African"
+			var words = new Array(
+				"A",	 "ACM", "ANSI", "ASAP", "ASCII", "ATM's", "Achilles",
+				"Ada", "Ada's", "Afghanistan", "Afghanistan's", "Africa",
+				"Africa's", "African", "African's", "Africans", "Airedale",
+				"Airedale's", "Alabama", "Alabama's", "Alabamian", "Alabamian's"
+			);
+			
+			alert("Going to search: " + words + "\nFor the word: " + word)
+			
+			var area = binarySearch(words, 0, words.length, word);
+			
+			if(area.match < 0)
+			{
+				alert("Did you mean?"
+					+ " " + words[area.lower]
+					+ " " + words[area.upper]
+					+ "\n" + area
+				);
+			}
+			else
+			{
+				alert("Found: " + words[area.match] + "\n" + area);
+			}
+		}
+	</script>
+</head>
+<body onload="test1();">
+</body>
+</html>

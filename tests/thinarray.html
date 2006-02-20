@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>Thin Array Test</title>
+		
+		<script language="javascript" type="text/javascript" src="../js/util/Log.js"></script>
+		<script language="javascript" type="text/javascript" src="../js/util/Collections.js"></script>
+		<script language="javascript" type="text/javascript" src="../js/util/thinarray.js"></script>
+		
+		<script type="text/javascript" language="javascript">
+			function doTest()
+			{
+				DEBUG = true;
+				log.init();
+				
+				log.debug("Making a thin array object");
+				
+				var ta = new ThinArray();
+				ta.fromPacket("|3|COL1|COL2|COL3|data1|data2|data3|121231233|231231232|323232323");
+
+				log.debug(ta);
+				
+				log.debug("Got the count of: " + ta.getRecordCount());
+				
+				log.debug("Got cell value for 1,2 of: " + ta.getCellValue(1,2));
+				log.debug("Changing the value to 'yadda'");
+				
+				ta.setCellValue(1,2,"yadda");
+				
+				log.debug("The output of the raw packet is:");
+				
+				log.debug(ta.toPacket());
+			}
+		</script>
+	</head>
+	
+	<body onload="doTest();">
+		<p>This page tests a thin array</p> 
+	</body>
+</html>

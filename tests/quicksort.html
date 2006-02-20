@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>untitled</title>
+	<script language="javascript" type="text/javascript" src="../js/sort/QuickSort.js"></script>
+	<script language="javascript" type="text/javascript">
+		function test1()
+		{
+			var arry = new Array(
+				10, 23, 49, 23, -93, 0, -1, 45, 11, 89,
+				78, 2, 5, 48, 20, 44, 49, 123, 6, 1
+			);
+			
+			alert("Start: " + arry);
+			qsort(arry, 0, arry.length);
+			alert("Done:  " + arry);
+			
+			arry = new Array(
+				"hello", "there", "my", "name", "is", "rob",
+				"what", "is", "your", "name", "again", "hi"
+			);
+			
+			alert("Start: " + arry);
+			qsort(arry, 0, arry.length);
+			alert("Done:  " + arry);
+		}
+	</script>
+</head>
+<body onload="test1();">
+</body>
+</html>
