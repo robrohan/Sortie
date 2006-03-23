@@ -211,6 +211,72 @@ function neuro_decode64(input)
 }
 
 /**
+ * Function: neuro_i18n
+ * Make sure any non-english chars get set right
+ * (entity referenced)
+ * 
+ * Parameters:
+ * 	str - the stirng to internationalize
+ *
+ * Returns:
+ * 	a string with proper entity references
+ * 	
+ */
+function neuro_i18n(str)
+{
+	str = escape(str);
+	
+	//do special cases
+	str = str.replace(/%A9/gi,   "%26copy%3B");
+	str = str.replace(/%AE/gi,   "%26reg%3B");
+	str = str.replace(/%u2014/gi,"%26mdash%3B");
+	str = str.replace(/%u201D/gi,"%26rdquo%3B");
+	str = str.replace(/%u201C/gi,"%26ldquo%3B");
+	str = str.replace(/%u2122/gi,"%26trade%3B");
+	str = str.replace(/%AB/gi,   "%26laquo%3B");
+	str = str.replace(/%BB/gi,   "%26raquo%3B");
+	str = str.replace(/%A5/gi,	"%26yen%3B");
+	str = str.replace(/%u20AC/gi,"%26euro%3B");
+	str = str.replace(/%u2018/gi,"%26lsquo%3B");
+	str = str.replace(/%u2019/gi,"%26rsquo%3B");
+	
+	
+	//do any high unicode characters (for non-latin languages)
+	//this works, but I'd rather find the right way first
+	str = str.replace(/%u([0-9A-F]{1,4})/gi,"%26%23x$1%3B");
+
+	//do lower character stuff
+	str = str.replace(/%([89A-F]{1,1}[0-9A-F]{1,1})/gi,"%26%23x$1%3B");
+	
+	return unescape(str);
+}
+
+/**
+ * Function: neuro_EntityToJS
+ * Takes and entity reference and turns it into a js unicode
+ * string &#xE9; to \uE9 for example. This expects there to be
+ * a div id'ed as "scratchpad" on the page.
+ * 
+ * Parameters:
+ * 	str - a string with entites in it
+ *
+ * Returns:
+ *	a string with js \u characters 	
+ */
+function neuro_EntityToJS(str)
+{
+	var ele = document.getElementById("scratchpad");
+	//if no scratch pad, just return the string
+	if(ele != null && typeof ele != "undefined")
+	{
+		ele.innerHTML = str;
+		return ele.innerHTML;
+	}
+	
+	return str;
+}
+
+/**
  * Function: neuro_parseBoolean
  * looks at a string and guesses if its a true or false value
  *

@@ -1,8 +1,7 @@
 /**
  * File: util/Cookie.js
- * Simple functions to get and set cookie information. Examples used from
- * http://www.webreference.com/js/column8/functions.html
- * 
+ * Simple functions to get and set cookie information
+ *
  * Copyright: 
  * 	2004 Rob Rohan robrohan@gmail.com All rights reserved
  */
@@ -16,7 +15,7 @@ var COOKIE_VERSION = "0.1";
 /**
  * Function: getCookie
  * gets a value from the current cookie
- * 
+ *
  * Parameters:
  * 	name - the name of the key in the cookie
  *
@@ -55,9 +54,60 @@ function getCookie(name)
  */
 function setCookie(name, value, expires, path, domain, secure) 
 {
-	document.cookie = name + "=" +escape(value) +
+	setRawCookie(
+		name + "=" +escape(value) +
 		( (expires) ? ";expires=" + expires.toGMTString() : "") +
 		( (path) ? ";path=" + path : "") + 
 		( (domain) ? ";domain=" + domain : "") +
-		( (secure) ? ";secure" : "");
+		( (secure) ? ";secure" : "")
+	);
+}
+
+/**
+ * Function: removeCookie
+ * Removes a cookie (sets the expires to the past really)
+ * 
+ * Parameters:
+ * 	name - the name
+ * 	path - (optional)
+ * 	domain - (optional)
+ * 	secure - (optional)
+ */
+function removeCookie(name, path, domain, secure)
+{
+	var thepast = new Date();
+	thepast.setYear(thepast.getYear() - 2);
+	
+	setCookie(name, "", thepast, path, domain, secure);
+}
+
+/**
+ * Function: setPermCookie
+ * sets a cookie that will last 20 years
+ * 
+ * Parameters:
+ * 	name - the name
+ *	value - the value of the cookie
+ * 	path - (optional)
+ * 	domain - (optional)
+ * 	secure - (optional)
+ */
+function setPermCookie(name, value, path, domain, secure)
+{
+	var thefuture = new Date();
+	var year = (thefuture.getYear() < 1000) ? thefuture.getYear() + 1900 : thefuture.getYear();
+	thefuture.setYear(year + 5);
+	setCookie(name, value, thefuture, path, domain, secure);
+}
+
+/**
+ * Function: setRawCookie
+ * Sets the preformatted string to the cookie
+ * 
+ * Parameters:
+ * 	cookie - the raw cookie string
+ */
+function setRawCookie(cookie)
+{
+	document.cookie = cookie;
 }
