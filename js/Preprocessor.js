@@ -108,7 +108,7 @@ function neuro_import()
 	//try to write script all in one go.
 	for(var i=0; i<importlen; i++)
 	{
-		var line = "<script type='text/javascript' src='" 
+		var line = "<script charset='utf-8' type='text/javascript' src='" 
 			+ __NEURO_IMPORTS[i]
 			+ "'";
 	

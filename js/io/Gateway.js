@@ -214,6 +214,9 @@ JSRemote.prototype.doPostRequest = function _doPostRequest(url, func_handler, bo
  	conn.setRequestHeader("XLibrary", "Neuromancer 1.5beta");
  	if(bodyinfo.indexOf("<?") == 0)
  	 	conn.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+ 	else
+ 		conn.setRequestHeader("Content-Type", "text/plain; charset=utf-8");
+ 	
  	conn.send(bodyinfo+"");
  	
  	

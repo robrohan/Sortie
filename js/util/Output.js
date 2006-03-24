@@ -224,7 +224,7 @@ function neuro_decode64(input)
  */
 function neuro_i18n(str)
 {
-	str = escape(str);
+	/* str = escape(str);
 	
 	//do special cases
 	str = str.replace(/%A9/gi,   "%26copy%3B");
@@ -249,6 +249,9 @@ function neuro_i18n(str)
 	str = str.replace(/%([89A-F]{1,1}[0-9A-F]{1,1})/gi,"%26%23x$1%3B");
 	
 	return unescape(str);
+	*/
+	
+	return str;
 }
 
 /**
