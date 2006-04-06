@@ -24,6 +24,9 @@ var DATATYPE_STRING 	= "soapenc:string";
 var DATATYPE_STRING2 = "xsd:string";
 var DATATYPE_ARRAY	= "soapenc:Array";
 var DATATYPE_BOOLEAN = "soapenc:boolean";
+var DATATYPE_NUMBER = "soapenc:double";
+var DATATYPE_NUMBER2 = "xsd:double";
+var DATATYPE_DATE_TIME = "xsd:dateTime";
 
 /**
  * Variable: REMOTE_OBJECT_VERSION 
@@ -74,11 +77,20 @@ function __gateway__map_from_struct(frag, xmldoc, nstruct)
 					//if(dItem.item(z).getAttribute("href") == null 
 					//	|| typeof dItem.item(z).getAttribute("href") == "undefined"
 					//	|| dItem.item(z).getAttribute("href") == "")
-					if(dItem.item(z).getAttribute("xsi:type") == DATATYPE_STRING)
+					var xsiType = dItem.item(z).getAttribute("xsi:type")
+					if(xsiType == DATATYPE_STRING || xsiType == DATATYPE_STRING2)
 					{
 						value = dItem.item(z).firstChild.nodeValue;	
 					}
-					else if(dItem.item(z).getAttribute("xsi:type") == DATATYPE_MAP)
+					else if (xsiType == DATATYPE_NUMBER || xsiType == DATATYPE_NUMBER2)
+					{
+						value = parseFloat(dItem.item(z).firstChild.nodeValue);
+					}
+					else if (xsiType == DATATYPE_DATE_TIME)
+					{
+						value = DefaultHandler.xmlDate2JSDate(dItem.item(z).firstChild.nodeValue);
+					}
+					else if(xsiType == DATATYPE_MAP)
 					{
 						value = new Map();
 						//value = "!ref! " + dItem.item(z).getAttribute("href");
@@ -88,7 +100,7 @@ function __gateway__map_from_struct(frag, xmldoc, nstruct)
 					}
 				}
 			}
-			nstruct.put(key,value);					
+			nstruct.put(key,value);
 		}
 	}
 }
@@ -136,14 +148,16 @@ function RemoteObjectLoader(url, handler, async)
 	if(typeof async == "undefined")
 		async = false;
 
-	RemoteObjectLoader.RemoteObjectFactory.setAsync(async);
-	RemoteObjectLoader.RemoteObjectFactory.createObject(RemoteObjectLoader.HTTPConnectFactory.getInstance(), url);
+	this.remoteObjectFactory = new RemoteObjectFactory();
+
+	this.remoteObjectFactory.setAsync(async);
+	this.remoteObjectFactory.createObject(RemoteObjectLoader.HTTPConnectFactory.getInstance(), url);
 
 	var self = this;
 	
 	checkLoaded = function() 
 	{
-		var remObj = RemoteObjectLoader.RemoteObjectFactory.getObject();
+		var remObj = self.remoteObjectFactory.getObject();
 		var fieldCount = 0;
 		for(var i in remObj) 
 		{
@@ -160,7 +174,6 @@ function RemoteObjectLoader(url, handler, async)
 	this.loadInterval = setInterval(checkLoaded, 100);
 }
 RemoteObjectLoader.HTTPConnectFactory = new HTTPConnectFactory();
-RemoteObjectLoader.RemoteObjectFactory = new RemoteObjectFactory();
 
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -704,6 +717,14 @@ DefaultHandler.prototype.handle = function __handle(str)
 				eval(__dfh__variable + " = resvalnodes.item(0).firstChild.nodeValue");
 			}
 		}
+		else if (returntype == DATATYPE_NUMBER || returntype == DATATYPE_NUMBER2)
+		{
+			eval(__dfh__variable + " = parseFloat(resvalnodes.item(0).firstChild.nodeValue)");
+		}
+		else if (returntype == DATATYPE_DATE_TIME)
+		{
+			eval(__dfh__variable + " = DefaultHandler.xmlDate2JSDate(resvalnodes.item(0).firstChild.nodeValue)");
+		}
 	//}
 	//this is a structure (a coldfusion struct)
 	//else if(complextypeid != null && complextypeid.length > 1)
@@ -753,6 +774,8 @@ DefaultHandler.prototype.handle = function __handle(str)
 	//show the value to stdout
 	if(__dfh__variable == "__neuro__myvar__")
 	{
+		// TODO: this throws not defined errors.  Probably should be if(typeof neuro_SystemOut == "function") instead
+		// Hopefully, however, no one will ever get here, because they'll always be using a callback.
 		if(neuro_SystemOut != null)
 		{
 			neuro_SystemOut("\n");
@@ -762,4 +785,29 @@ DefaultHandler.prototype.handle = function __handle(str)
 				neuro_Runner("");
 		}
 	}
+};
+
+DefaultHandler.xmlDate2JSDate = function __xmlDate2JSDate(xmlDate) {
+	var val = xmlDate.split("T");
+	// split it into date and time portions
+	var date = val[0];
+	var time = val[1];
+	date = date.split("-");
+	time = time.split(":");
+	// rip out the date portions
+	var year = date[0];
+	var month = date[1] - 1; // JS uses 0-11, not 1-12
+	var day = date[2];
+	// rip out the time portions
+	var hours = time[0];
+	var minutes = time[1];
+	var seconds = parseFloat(time[2]);
+	// convert fractional seconds to milliseconds
+	var millis = Math.round((seconds - Math.floor(seconds) ) * 1000);
+	seconds = Math.floor(seconds);
+	// assemble the completed date
+	var completeDate = new Date(year, month, day, hours, minutes, seconds, millis);
+	// adjust the time from UTC (Zulu) to local time
+	// TODO: change the to check for the appropriate adjustment, rather than blindly assuming UTC
+	return new Date(completeDate.getTime() - (completeDate.getTimezoneOffset() * 60 * 1000));
 };
