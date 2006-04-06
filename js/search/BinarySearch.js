@@ -22,7 +22,13 @@ function HitArea()
 }
 
 /**
- * Array A, int Lb, int Ub, int Key
+ * Function: binarySearch
+ * 
+ * Parameters:
+ *	array - the array to search
+ *	lower - the lower bound (0 when whole array)
+ * 	upper - the upper bound (array.len when whole array)
+ * 	key - what you're searching for
  */
 function binarySearch(array, lower, upper, key)
 {
@@ -56,5 +62,3 @@ function binarySearch(array, lower, upper, key)
 		}
 	}
 }
-
-////////////////////////////////////////////////////////////////////////
