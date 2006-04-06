@@ -51,7 +51,7 @@
 #
 ###########################################################################################
 
-COPYRIGHT="(c) 2006 FiveAcross All rights reserved."
+COPYRIGHT="(c) 2004-2006 Rob Rohan, Richard Applebaum, and Barney Boisvert"
 
 usage()
 {
