@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<tst:Thing xmlns:tst="http://neuromancer.sf.net/tests">
+	<tst:MyElement editable="true">
+		Yadda!
+	</tst:MyElement>
+</tst:Thing>

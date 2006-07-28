@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<project name="nightly_build" basedir="." default="All">
+	<!-- 
+		For this to work you need to move:
+		svnant.jar => /Developer/Java/Ant/lib
+		granymed.jar => /Library/Java/Extensions
+		javasvn.jar => /Developer/Java/Ant/lib
+		svnjavahl.jar => /Developer/Java/Ant/lib
+		svnClientAdapter.jar => /Developer/Java/Ant/lib
+	-->
+	<taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask"/>
+	<!--
+		http://3sp.com/showMaverickAntTask.do
+		For this to work you need to move:
+		maverick-ant.jar => /Developer/Java/Ant/lib
+	-->
+	<taskdef name="ssh" classname="com.sshtools.ant.Ssh" />
+	
+	<property name="project_name" value="Neuromancer" />
+	
+	<property name="major_version" value="0.6.5" />
+	<property name="version_seed"  value="20060407" />
+	<property name="zip_full_name" value="${project_name}_${major_version}.zip" />
+	
+	<property name="repo.path" value="https://svn.sourceforge.net/svnroot/neuromancer" />
+	<!-- trunk, branches, tags + version or whatever -->
+	<property name="repo.version" value="trunk" />
+	<property name="repo.username" value="" />
+	<property name="repo.password" value="" />
+	
+	<property name="ssh.server" value="neuromancer.sf.net" />
+	<property name="ssh.username" value="${repo.username}" />
+	<property name="ssh.password" value="${repo.password}" />
+	<property name="ssh.offsetdir" value="www4" />
+	
+	<property name="working_dir" value="${project_name}_${major_version}_${version_seed}" />
+	<property name="working_dir_fullpath" value="/Users/robrohan/Documents/NeuromancerNightly" />
+	<!-- ///////////////////////////////////////////////////// -->
+	
+	<target name="All" depends="UpdateServer">
+	</target>
+	
+	<!-- -->
+	<target name="Clean">
+		<delete dir="${working_dir}"/>
+	</target>
+	
+	<!-- init is executed before each target ,createRepository -->
+	<target name="Checkout">
+		<property name="urlRepository" value="${repo.path}/${repo.version}" />  
+		
+		<mkdir dir="${working_dir}" />
+		
+		<svn username="${repo.username}" password="${repo.password}">
+			<checkout url="${urlRepository}" destPath="${working_dir}" />
+		</svn>
+	</target>
+	
+	<!-- run natural doc -->
+	<target name="CreateDocumentation" depends="Checkout">
+		<exec executable="ant">
+			<arg line="-f ${working_dir}/build.xml"/>
+			<arg line="-Dapp-filename=${project_name}"/>
+			<arg line="-Dapp-version=${major_version}"/>
+			<arg line="zipdocumentation"/>
+		</exec>
+	</target>
+	
+	<!-- compile the compiler -->
+	<target name="CompileCompiler" depends="CreateDocumentation">
+		<exec executable="ant">
+			<arg line="-f ${working_dir}/build.xml"/>
+			<arg line="-Dapp-filename=${project_name}"/>
+			<arg line="-Dapp-version=${major_version}"/>
+			<arg line="compile_compressor"/>
+		</exec>
+	</target>
+	
+	<!-- create the minimized files -->
+	<target name="JSMinFiles" depends="CompileCompiler">
+		<exec executable="chmod">
+			<arg line="u+x" />
+			<arg line="${working_dir}/CompressJS.sh" />
+		</exec>
+		
+		<exec executable="ant">
+			<arg line="-f ${working_dir}/build.xml"/>
+			<arg line="-Dapp-filename=${project_name}"/>
+			<arg line="-Dapp-version=${major_version}"/>
+			<arg line="-Dproject.fullpath=${working_dir_fullpath}/${working_dir}" />
+			<arg line="livesrc"/>
+		</exec>
+	</target>
+	
+	<!-- -->
+	<target name="ZipWorkingDir" depends="JSMinFiles">
+		<zip destfile="${zip_full_name}"
+			basedir="./"
+			includes="${working_dir}/**"
+		/>
+	</target>
+	
+	<!-- -->
+	<target name="UpdateServer" depends="ZipWorkingDir">
+		<ssh host="${ssh.server}"
+			username="${ssh.username}"
+			password="${ssh.password}"
+			version="2">
+			
+			<sftp action="put" remotedir="${ssh.offsetdir}" verbose="true">
+				<fileset dir=".">
+					<include name="${zip_full_name}"/>
+				</fileset>
+				<fileset dir="./${working_dir}">
+					<include name="${project_name}_${major_version}_doc.zip"/>
+					<include name="${project_name}_${major_version}_bin.zip"/>
+				</fileset>
+			</sftp>
+			
+			<!-- unzip the documentation -->
+			<exec cmd="cd ${ssh.offsetdir}" />
+			<exec cmd="unzip -o ${project_name}_${major_version}_doc.zip"/>
+		</ssh>
+		
+		<delete dir="${working_dir}"/>
+		<delete file="${zip_full_name}"/>
+	</target>
+</project>
