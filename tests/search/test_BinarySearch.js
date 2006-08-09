@@ -1,5 +1,5 @@
 
-function test_BinarySearchFindItem()
+Tests.test_BinarySearchFindItem = function()
 {
 	var word = "African"
 	var words = new Array(
@@ -14,7 +14,7 @@ function test_BinarySearchFindItem()
 	return JUAssert.equal(area.match, 13);
 }
 
-function test_BinarySearchNotFoundItem()
+Tests.test_BinarySearchNotFoundItem = function()
 {
 	var word = "Abba"
 	var words = new Array(

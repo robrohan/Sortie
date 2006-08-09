@@ -1,5 +1,5 @@
 
-function test_neuro_decToHex()
+Tests.test_neuro_decToHex = function()
 {
 	for(var q=0; q<10; q++)
 	{
@@ -26,12 +26,12 @@ function test_neuro_decToHex()
 	return JUAssert.pass();
 }
 
-function test_neuro_xmlFormat()
+Tests.test_neuro_xmlFormat = function()
 {
 	return JUAssert.equal(neuro_xmlFormat("<test>&</test>"),"&lt;test&gt;&amp;&lt;/test&gt;");
 }
 
-function test_neuro_parseBoolean()
+Tests.test_neuro_parseBoolean = function()
 {
 	if(!neuro_parseBoolean("TRUE"))
 		return JUAssert.fail();
@@ -48,7 +48,7 @@ function test_neuro_parseBoolean()
 	return JUAssert.pass();
 }
 
-function test_neuro_Reflect()
+Tests.test_neuro_Reflect = function()
 {
 	log.debug("!!!test_neuro_Reflect: Reflecting information about the Log object...");
 	neuro_Reflect(log);

@@ -1,6 +1,6 @@
 
 
-function test_MakeMap()
+Tests.test_MakeMap = function()
 {
 	log.debug("Making a map");
 	var map = new Map();
@@ -14,7 +14,7 @@ function test_MakeMap()
 	);
 }
 
-function test_ContainsNoCase()
+Tests.test_ContainsNoCase = function()
 {
 	var map = new Map();
 	for(var q=0; q<3; q++)
@@ -28,7 +28,7 @@ function test_ContainsNoCase()
 	);
 }
 
-function test_MakeList()
+Tests.test_MakeList = function()
 {
 	log.debug("Making a list");
 	var list = new List();
@@ -44,7 +44,7 @@ function test_MakeList()
 	);
 }
 
-function test_MakeSet()
+Tests.test_MakeSet = function()
 {
 	log.debug("Making a set");
 	var set = new Set();

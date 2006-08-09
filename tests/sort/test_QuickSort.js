@@ -1,5 +1,5 @@
 
-function test_QuickSortNumeric()
+Tests.test_QuickSortNumeric = function()
 {
 	var arry = [10, 23, 49, 23, -93, 0, -1, 45, 11, 89,78, 2, 5, 48, 20, 44, 49, 123, 6, 1];
 
@@ -8,7 +8,7 @@ function test_QuickSortNumeric()
 	return JUAssert.equal(arry,[-93,-1,0,1,2,5,6,10,11,20,23,23,44,45,48,49,49,78,89,123]);
 }
 
-function test_QuickSortAlpha()
+Tests.test_QuickSortAlpha = function()
 {
 	arry = ["hello", "there", "my", "name", "is", "rob","what", "is", "your", "name", "again", "hi"];
 	

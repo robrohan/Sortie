@@ -37,7 +37,8 @@ function run_tests(showbanner)
 	
 	resultsdiv = document.getElementById("testresults");
 	
-	for(i in this)
+	//for(i in this)
+	for(i in Tests)
 	{
 		//if it looks like a test function
 		var arry = i.toString().match(/^test_/);
@@ -45,7 +46,7 @@ function run_tests(showbanner)
 		{
 			try
 			{
-				eval( "ju_test_results.put('"+i+"',eval( " + i+"()))" );
+				eval( "ju_test_results.put('"+i+"',eval(Tests." + i+"()))" );
 			}
 			catch(e)
 			{
@@ -57,6 +58,9 @@ function run_tests(showbanner)
 	
 	ju_display_results();
 }
+
+function _Tests(){;}
+Tests = new _Tests();
 
 function ju_show_banner()
 {

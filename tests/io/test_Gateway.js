@@ -1,5 +1,5 @@
 
-function test_LoadXMLFile()
+Tests.test_LoadXMLFile = function()
 {	
 	var httpcon = new HTTPConnectFactory().getInstance();
 	var remote = new JSRemote(httpcon,true);

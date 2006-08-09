@@ -12,7 +12,7 @@
 var PROPERTIESFILE = "#this is a comment\none=won\n#comment here too\ntwo=too\nthree=thee";
 var PROPERTIESSTORE = "one=won\ntwo=too\nthree=thee";
 
-function test_PropertiesParse()
+Tests.test_PropertiesParse = function()
 {
 	var props = new Properties();
 	props.parse(PROPERTIESFILE);
@@ -21,7 +21,7 @@ function test_PropertiesParse()
 }
 
 
-function test_PropertiesGetProperty()
+Tests.test_PropertiesGetProperty = function()
 {
 	var props = new Properties();
 	props.parse(PROPERTIESFILE);
@@ -31,7 +31,7 @@ function test_PropertiesGetProperty()
 	return JUAssert.equal(rtn, "won");
 }
 
-function test_PropertiesSetProperty()
+Tests.test_PropertiesSetProperty = function()
 {
 	var props = new Properties();
 	props.parse(PROPERTIESFILE);
@@ -51,7 +51,7 @@ function test_PropertiesSetProperty()
 	return JUAssert.equal(rtn, "obi-wan");
 }
 
-function test_PropertiesStore()
+Tests.test_PropertiesStore = function()
 {
 	var props = new Properties();
 	props.parse(PROPERTIESFILE);

@@ -2,7 +2,7 @@
 var COOKIE_NAME="test_cookie_name";
 var COOKIE_VALUE="test_cookie_value";
 
-function test_GetSetCookie()
+Tests.test_GetSetCookie = function()
 {
 	log.debug("!! Setting the cookie " + COOKIE_NAME + " NOTE some browsers wont work with a local file");
 	log.debug("you may need to run this test from a live server.");
@@ -11,7 +11,7 @@ function test_GetSetCookie()
 	return JUAssert.equal(getCookie(COOKIE_NAME), COOKIE_VALUE);
 }
 
-function test_RemoveCookie()
+Tests.test_RemoveCookie = function()
 {
 	setCookie(COOKIE_NAME,COOKIE_VALUE);
 	
@@ -27,7 +27,7 @@ function test_RemoveCookie()
 	return JUAssert.isNull(getCookie(COOKIE_NAME));
 }
 
-function test_SetPermCookie()
+Tests.test_SetPermCookie = function()
 {
 	var passed = false;
 	

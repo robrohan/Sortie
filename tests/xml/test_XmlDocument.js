@@ -2,7 +2,7 @@
 
 var TESTXML = '<root xmlns="blarg.com"><inner xmlns="hook.com">this item</inner><inner xmlns="wrong.com">wrong test</inner></root>';
 
-function test_XMLDocFromString()
+Tests.test_XMLDocFromString = function()
 {
 	log.debug("Starting XML load...")
 	var myDoc = new XMLDocumentFactory().getInstance();
@@ -12,7 +12,7 @@ function test_XMLDocFromString()
 	return JUAssert.equal(myDoc.documentElement.nodeName, "root");
 }
 
-function test_XMLGetElementsNameNS()
+Tests.test_XMLGetElementsNameNS = function()
 {
 	var myDoc = new XMLDocumentFactory().getInstance();
 	myDoc.loadXML(TESTXML);
@@ -22,7 +22,7 @@ function test_XMLGetElementsNameNS()
 	return JUAssert.equal(nodeset1.length, 1);
 }
 
-function test_XMLCreateElement()
+Tests.test_XMLCreateElement = function()
 {
 	var myDoc = new XMLDocumentFactory().getInstance();
 	myDoc.loadXML(TESTXML);
