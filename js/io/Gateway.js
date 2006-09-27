@@ -113,9 +113,23 @@ function JSRemote(connection, asyn)
 		
 	/**
 	 * Method: JSRemote.doRequest
+	 * Used to do an actual request. Pass in an anon object with the
+	 * connection specifics. For example:
+	 * (code)
+	 *	var httpcon = new HTTPConnectFactory().getInstance();
+	 *	var remote = new JSRemote(httpcon, true);
+	 *
+	 *	remote.doRequest({ 
+	 *		method:"POST",
+	 *		url:"http://mysite.com/handler.php",
+	 *		handler:function(e,conn){ alert(e) },
+	 *		body:""
+	 *	});
+	 * (end code)
 	 *
 	 * Parameters:
 	 * 	params - an object that has the following properties
+	 * (code)
 	 * 		method = GET,POST,DELETE,PUT,etc
 	 *		url = where to call to
 	 *		handler = the call back function
@@ -127,6 +141,7 @@ function JSRemote(connection, asyn)
 	 *		username = the http username
 	 * 		password = the http password
 	 * 		encoding = default is utf-8
+	 * (end code)
 	 */
 	this.doRequest = function(params) {
 		
