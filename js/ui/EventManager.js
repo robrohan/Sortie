@@ -342,8 +342,8 @@ function neuro_getKeyCodeFromEvent(evt)
 {
 	if(SysBrowser.explore)
 		return evt.keyCode;
-    else if(SysBrowser.gecko || SysBrowser.safari)
-        return evt.which;
+	else if(SysBrowser.gecko || SysBrowser.safari)
+		return evt.which;
 }
 
 /**
@@ -368,11 +368,11 @@ function neuro_getKeyFromEvent(evt)
  * onKeyPress(), onKeyUp(), onMouseDown(), 
  * onMouseUp() 
  */
-SysDocument.onmousemove 	= _checkMove;
-SysDocument.onmousedown 	= _checkMDown;
-SysDocument.onmouseup   	= _checkMUp;
-SysDocument.onclick     	= _checkClick;
-SysDocument.onkeydown   	= _checkKeyDown;
-SysDocument.onkeyup     	= _checkKeyUp;
-SysDocument.onkeypress  	= _checkKeyPress;
-window.onload 			= _checkOnLoad;
+SysDocument.onmousemove     = _checkMove;
+SysDocument.onmousedown     = _checkMDown;
+SysDocument.onmouseup       = _checkMUp;
+SysDocument.onclick         = _checkClick;
+SysDocument.onkeydown       = _checkKeyDown;
+SysDocument.onkeyup         = _checkKeyUp;
+SysDocument.onkeypress      = _checkKeyPress;
+window.onload               = _checkOnLoad;
