@@ -63,7 +63,7 @@ Sortie.Util.Text = function() {
 	 * 	a string representation of the object
 	 */
 	this.Reflect = function(obj) {
-		var str = NEWLINE + "(" + typeof obj + ")");
+		var str = NEWLINE + "(" + typeof obj + ")";
 		for(var i in obj) {
 			if(i.toString().charAt(0) != "_") {
 				str += NEWLINE + typeof obj[i] + " :: " + i;
@@ -84,7 +84,7 @@ Sortie.Util.Text = function() {
 	 * Returns:
 	 * 	the expanded object in a printable string
 	 */
-	this.ExpandError function(e) {
+	this.ExpandError = function(e) {
 		var stamp = NEWLINE
 		stamp += "Name: "    + e.name + NEWLINE;
 		stamp += "Desc: "    + e.description + NEWLINE;
