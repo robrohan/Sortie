@@ -1,35 +1,35 @@
 <?xml version="1.0"?>
 <!--
-	Build file for Neuromancer.
+	Build file for Sortie (Neuromancer)
 	Copyright 2004 Rob Rohan
 -->
-<project name="neuromancer" default="srcit" basedir=".">
+<project name="Sortie" default="srcit" basedir=".">
 	
 	<!-- this should he the printable name -->
-	<property name="app-name" value="Neuromancer" />
+	<property name="app-name" value="Sortie" />
 	<!-- this controls the name of the jar file as well as the name of the icon file
 		and a few other things -->
-	<property name="app-filename" value="neuromancer" />
-	<property name="app-version" value="0.6.5" />
+	<property name="app-filename" value="Sortie" />
+	<property name="app-version" value="0.6.6" />
 	
 	<property name="nd.path" value="/usr/local/NaturalDocs/NaturalDocs" />
 	<property name="nd.format" value="HTML" />
 	<property name="nd.doc_dir"  value="doc" />
-	<property name="nd.code_dir" value="js" />
+	<property name="nd.code_dir" value="src" />
 	<property name="nd.work_dir" value="doc_working" />
 	
-	<property name="project.fullpath" value="/Users/robrohan/Documents/workspace/Neuromancer" />
+	<property name="project.fullpath" value="/Users/Rohan/Documents/workspace/Neuromancer" />
 	
 	<!-- Compression input and output paths (must be absolute). The script is a 
 		bash shell script so Mac and Linux should work right off, but other people might
 		need cygwin or something. Set the project.fullpath variable above -->
 	<property name="compress.path" value="${project.fullpath}/CompressJS.sh" />
-	<property name="compress.srcpath" value="${project.fullpath}/js" />
+	<property name="compress.srcpath" value="${project.fullpath}/src" />
 	<property name="compress.binpath" value="${project.fullpath}/bin" />
 	
 	<!-- build a source distribution that someone can open in an editor and code on. See
 		livesrc for a faster, less human readable zip -->
-	<target name="srcit" depends="zipdocumentation">
+	<target name="srcit" depends="zipdocumentation" description="Build a source distribution that is human readable">
 		<zip destfile="${app-filename}_${app-version}_src.zip"
 			basedir="."
 			includes="**/*.js,**/*.cfc, build.xml, readme.txt, CompressJS.sh, license.txt, **/tests/*, *.c"
@@ -39,7 +39,7 @@
 	
 	<!-- build a source distribution of just the javascript files (for site updates
 		mostly) -->
-	<target name="livesrc" depends="compress">
+	<target name="livesrc" depends="compress" description="Build a compressed distrobution (no docs or source)">
 		<zip destfile="${app-filename}_${app-version}_bin.zip"
 			basedir="${compress.binpath}"
 			includes="**/*.js"
@@ -48,7 +48,7 @@
 	</target>
 	
 	<!-- Removes comments and whitespace from the input and output directories -->
-	<target name="compress">
+	<target name="compress" description="'Compile' the source to the bin directory">
 		<mkdir dir="${compress.binpath}"/>
 		
 		<exec executable="${compress.path}">
@@ -58,7 +58,7 @@
 	</target>
 	
 	<!-- Removes comments and whitespace from the input and output directories -->
-	<target name="compile_compressor">		
+	<target name="compile_compressor" description="GCC compile the compressor">
 		<exec executable="gcc">
 			<arg line="-o jsmin" />
 			<arg line="jsmin.c" />
@@ -67,7 +67,7 @@
 	
 	<!-- note this requires the NaturalDoc program which is written in perl and can 
 		run on any system ... google -->
-	<target name="document">
+	<target name="document" description="Generate API documentation">
 		<mkdir dir="${nd.doc_dir}"/>
 		<mkdir dir="${nd.work_dir}"/>
 		
@@ -81,7 +81,7 @@
 	</target>
 	
 	<!-- Builds a zip of the documentation	-->
-	<target name="zipdocumentation" depends="document">
+	<target name="zipdocumentation" depends="document" description="Zip (and create) the API documentation">
 		<zip destfile="${app-filename}_${app-version}_doc.zip"
 			basedir="."
 			includes="doc/**"

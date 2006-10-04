@@ -51,7 +51,7 @@
 #
 ###########################################################################################
 
-COPYRIGHT="(c) 2004-2006 Rob Rohan, Richard Applebaum, and Barney Boisvert"
+COPYRIGHT="(c) 2004-2006 Rob Rohan and Barney Boisvert"
 
 usage()
 {
@@ -69,7 +69,10 @@ compress_and_mkdir()
 {
 	for i in `ls $1`
 	do
-		FULL_FILE_SRC_PATH=`find . -name "$i"`
+		#FULL_FILE_SRC_PATH=`find $1 -name "$i"`
+		FULL_FILE_SRC_PATH="$1/$i"
+		
+		echo "Full path: $FULL_FILE_SRC_PATH"
 		
 		#this is a bit lame, but the right way wasn't working in ant properly :-/
 		cat $FULL_FILE_SRC_PATH > /dev/null 2>&1
@@ -77,8 +80,10 @@ compress_and_mkdir()
 		if [ $? != 0 ]; then
 			echo "Entering Directory $i..."
 			
-			LC_CURRENT_DIR="$CURRENT_DIR/$i"
-			LC_CURRENT_BIN_DIR="$CURRENT_BIN_DIR/$i"
+			#LC_CURRENT_DIR="$CURRENT_DIR/$i"
+			LC_CURRENT_DIR="$1/$i"
+			#LC_CURRENT_BIN_DIR="$CURRENT_BIN_DIR/$i"
+			LC_CURRENT_BIN_DIR="$2/$i"
 			
 			#make the bin dir if it's not there
 			if [ ! -d $LC_CURRENT_BIN_DIR ]; then
@@ -88,14 +93,16 @@ compress_and_mkdir()
 					error_occurred "Could not make bin directory $LC_CURRENT_BIN_DIR"
 				fi
 			fi
-			compress_and_mkdir $LC_CURRENT_DIR $2/$i
+			compress_and_mkdir $LC_CURRENT_DIR $LC_CURRENT_BIN_DIR #$2/$i
 		else
 			ISJSFILE=`echo $FULL_FILE_SRC_PATH | grep \\.js`
 			#echo "----------------> $ISJSFILE"
 			if [ "$ISJSFILE" != "" ]; then
-				echo "About to compress: $FULL_FILE_SRC_PATH -> $CURRENT_BIN_DIR/$2/$i"
+				#echo "About to compress: $FULL_FILE_SRC_PATH -> $CURRENT_BIN_DIR/$2/$i"
+				echo "About to compress: $FULL_FILE_SRC_PATH -> $2/$i"
 				#compress_file "$FULL_FILE_SRC_PATH" "$CURRENT_BIN_DIR/$2/$i"
-				./jsmin < "$FULL_FILE_SRC_PATH" > "$CURRENT_BIN_DIR/$2/$i" "$COPYRIGHT"
+				#./jsmin < "$FULL_FILE_SRC_PATH" > "$CURRENT_BIN_DIR/$2/$i" "$COPYRIGHT"
+				./jsmin < "$FULL_FILE_SRC_PATH" > "$2/$i" "$COPYRIGHT"
 			else
 				echo "$FULL_FILE_SRC_PATH doesn't look like a javascript file"
 			fi
@@ -110,6 +117,6 @@ if [ "$1" = "" ]; then
 	usage
 fi
 
-compress_and_mkdir $1
+compress_and_mkdir $1 $2
 
 exit 0
