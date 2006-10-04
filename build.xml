@@ -13,7 +13,7 @@
 	<property name="app-version" value="0.6.6" />
 	<property name="app-copyright" value="'(c) 2004-2006 Rob Rohan and Barney Boisvert. All Rights Reserved'" />
 	
-	<property name="nd.path" value="/usr/local/NaturalDocs/NaturalDocs" />
+	<property name="nd.path" value="/Applications/NaturalDocs/NaturalDocs" />
 	<property name="nd.format" value="HTML" />
 	<property name="nd.doc_dir"  value="doc" />
 	<property name="nd.code_dir" value="src" />
