@@ -33,6 +33,14 @@ Sortie.Util.Text = function() {
 		return str;
 	};
 	
+	this.UnXmlFormat = function(str) {
+		var clean = str.replace(/&nbsp;/g," ");
+		clean = clean.replace(/&lt;/g,"<");
+		clean = clean.replace(/&gt;/g,">");
+		clean = clean.replace(/&amp;/g,"&");
+		return clean;
+	}
+	
 	/**
 	 * Function: ParseBoolean
 	 * looks at a string and guesses if its a true or false value

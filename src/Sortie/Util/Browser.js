@@ -26,7 +26,7 @@ Sortie.Util.Browser.Safari = (
  * 	boolean for is gecko 
  */
 Sortie.Util.Browser.Gecko = (
- 	!SysBrowser.safari && (document.getElementById && !document.all)
+ 	!this.Safari && (document.getElementById && !document.all)
 );
 
 /**
