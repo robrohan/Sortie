@@ -127,7 +127,7 @@ Sortie.UI.EventManager = function() {
 	 * 	func - the call back function to run when this event occurs
 	 */
 	this.AddMouseDownListener = function(func) {
-		this.__addListener(this._mdownListeners,func);
+		this.__addListener(this.mdownListeners,func);
 	}
 	
 	/**
