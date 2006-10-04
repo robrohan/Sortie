@@ -51,11 +51,9 @@
 #
 ###########################################################################################
 
-COPYRIGHT="(c) 2004-2006 Rob Rohan and Barney Boisvert"
-
 usage()
 {
-	echo "$0 <source_dir> <bin_dir>"
+	echo "$0 <source_dir> <bin_dir> <copyright>"
 	exit 1;
 }
 
@@ -112,6 +110,7 @@ compress_and_mkdir()
 
 CURRENT_DIR="$1"
 CURRENT_BIN_DIR="$2"
+COPYRIGHT="$3"
 
 if [ "$1" = "" ]; then
 	usage

@@ -11,6 +11,7 @@
 		and a few other things -->
 	<property name="app-filename" value="Sortie" />
 	<property name="app-version" value="0.6.6" />
+	<property name="app-copyright" value="'(c) 2004-2006 Rob Rohan and Barney Boisvert. All Rights Reserved'" />
 	
 	<property name="nd.path" value="/usr/local/NaturalDocs/NaturalDocs" />
 	<property name="nd.format" value="HTML" />
@@ -26,6 +27,9 @@
 	<property name="compress.path" value="${project.fullpath}/CompressJS.sh" />
 	<property name="compress.srcpath" value="${project.fullpath}/src" />
 	<property name="compress.binpath" value="${project.fullpath}/bin" />
+	
+	<property name="combine.path" value="${project.fullpath}/CombineJS.sh" />
+	<property name="combine.filename" value="${app-filename}_${app-version}.js" />
 	
 	<!-- build a source distribution that someone can open in an editor and code on. See
 		livesrc for a faster, less human readable zip -->
@@ -54,10 +58,21 @@
 		<exec executable="${compress.path}">
 			<arg line="${compress.srcpath}" />
 			<arg line="${compress.binpath}" />
+			<arg line="${app-copyright}" />
 		</exec>
 	</target>
 	
-	<!-- Removes comments and whitespace from the input and output directories -->
+	<!-- makes all the files in the bin tree into a single file -->
+	<target name="combine" depends="compress" description="Creates a single file out of the bin tree">
+		<exec executable="${combine.path}">
+			<arg line="${compress.binpath}" />
+			<arg line="${combine.filename}" />
+			<arg line="${app-copyright}" />
+		</exec>
+	</target>
+	
+	
+	<!-- Compiles the compressor (needs GCC) -->
 	<target name="compile_compressor" description="GCC compile the compressor">
 		<exec executable="gcc">
 			<arg line="-o jsmin" />
