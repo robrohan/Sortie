@@ -83,6 +83,7 @@ function ju_display_results()
 		var value = ju_test_results.get(key);
 		
 		testdiv.setAttribute("class","jutest");
+		//testdiv.style.className = "jutest";
 		testdiv.setAttribute("id",key);
 		
 		if(value == null || typeof value == "undefined")
@@ -94,11 +95,13 @@ function ju_display_results()
 		
 		var funcdiv = document.createElement("DIV");
 		funcdiv.setAttribute("class","testname");
-		funcdiv.innerHTML = key;
+		//funcdiv.style.className = "testname";
+		funcdiv.appendChild(document.createTextNode(key));
 		
 		var resultdiv = document.createElement("DIV");
 		resultdiv.setAttribute("class","resulttext " + result);
-		resultdiv.innerHTML = result;
+		//resultdiv.style.className = "resulttext" + result;
+		resultdiv.appendChild(document.createTextNode(result));
 		
 		testdiv.appendChild(funcdiv);
 		testdiv.appendChild(resultdiv);
