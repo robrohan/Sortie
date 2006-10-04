@@ -22,7 +22,7 @@ Sortie.UI.Screen = function() {
 	 * Returns:
 	 *	the x position on screen
 	 */
-	this.findPosX = function(obj) {
+	this.FindPosX = function(obj) {
 		var curleft = 0;
 		if(obj.offsetParent) {
 			while(1) {
@@ -36,7 +36,7 @@ Sortie.UI.Screen = function() {
 		}
 		
 		return curleft;
-	}
+	};
 	
 	/**
 	 * Function: findPosY
@@ -51,7 +51,7 @@ Sortie.UI.Screen = function() {
 	 * Returns:
 	 *	the y position on screen
 	 */
-	this.findPosY = function(obj) {
+	this.FindPosY = function(obj) {
 		var curtop = 0;
 		if(obj.offsetParent) {
 			while(1) {
@@ -65,5 +65,14 @@ Sortie.UI.Screen = function() {
 		}
 		
 		return curtop;
-	}
+	};
 }
+
+
+/////////////////////META DATA //////////////////////////////////////////////
+/** 
+ * Variable: Sortie.UI.Screen.VERSION 
+ * 	the current version 
+ */
+Sortie.UI.Screen["VERSION"] = "0.1";
+///////////////////////////////////////////////////////////////////////////
