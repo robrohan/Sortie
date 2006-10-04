@@ -13,7 +13,7 @@
 
 if(!Sortie.IO) Sortie.IO = {};
 
-if(!Sortie.IO) Sortie.IO.Gateway = {};
+if(!Sortie.IO.Gateway) Sortie.IO.Gateway = {};
 
 Sortie.Core.$({
 	require:new Array(
@@ -245,7 +245,7 @@ Sortie.IO.Gateway = function(connection, asyn) {
 
 /////////////////////META DATA //////////////////////////////////////////////
 /** 
- * Variable: Sortie.Util.Gateway.VERSION 
+ * Variable: Sortie.IO.Gateway.VERSION 
  * 	the current version 
  */
 Sortie.IO.Gateway["VERSION"] = "0.2";
