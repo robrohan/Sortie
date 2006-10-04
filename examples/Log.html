@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC 
+	"-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>untitled</title>
+	<script type="text/javascript" src="../src/Sortie/Sortie.js"></script>
+	<script type="text/javascript">
+		Sortie.Core.$({
+			include:new Array(
+				"../src/Sortie/Util/Log.js"
+			)
+		})
+		Sortie.Core.Include();
+	</script>
+	
+	<script type="text/javascript">
+		function Startup(){
+			//set the gloabl debug or entries will go to devnull
+			Sortie.DEBUG = true;
+			
+			var log = new Sortie.Util.Log();
+			log.Redirect(log.USER_DIV);
+			log.Init();
+			
+			log.Debug("Hi");
+			log.Warn("Big Trouble!");
+			log.Error("Ah you broke it.");
+			log.Debug("<b>stuff</b>");
+		}
+	</script>
+	
+</head>
+<body onload="Startup();">
+	<h1>My Log</h1>
+	<div id="neurolog" 
+		style="height: 300px; width: 600px; color: green; background: black; font-size: 8pt; font-family: monaco,courier,serif;"
+	></div>
+</body>
+</html>
