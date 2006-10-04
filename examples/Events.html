@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC 
+	"-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>untitled</title>
+	<script type="text/javascript" src="../src/Sortie/Sortie.js"></script>
+	<script type="text/javascript">
+		Sortie.Core.$({
+			include:new Array(
+				"../src/Sortie/UI/EventManager.js",
+				"../src/Sortie/UI/Mouse.js"
+			)
+		})
+		
+		Sortie.Core.Include();
+	</script>
+	
+	<script type="text/javascript">
+		function Startup(){
+			var em = new Sortie.UI.EventManager();
+			em.Init(document);
+			
+			em.AddMoveListener(
+				function(e) {
+					Sortie.UI.Mouse.SetCoords(e);
+					window.status = "X: " + Sortie.UI.Mouse.X + " Y:" + Sortie.UI.Mouse.Y;
+				}
+			);
+			
+		}
+	</script>
+	
+</head>
+<body onload="Startup();">
+	<p>Look in the window status for the current mouse coordinates</p>
+</body>
+</html>
