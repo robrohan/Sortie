@@ -3,8 +3,9 @@
 # 1 = the directory where the js files live (the ones to combine)
 # 2 = the new file name
 # 3 = the copyright
+# 4 = the main file (the file to go in first)
 
-MAIN_FILE="Sortie.js"
+MAIN_FILE=$4
 MAIN_JS_FILE=`find $1 -name "*.js" | grep $MAIN_FILE`
 OTHER_JS_FILES=`find $1 -name "*.js" | grep -v $MAIN_FILE`
 

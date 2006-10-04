@@ -68,6 +68,7 @@
 			<arg line="${compress.binpath}" />
 			<arg line="${combine.filename}" />
 			<arg line="${app-copyright}" />
+			<arg line="Sortie.js" />
 		</exec>
 	</target>
 	
