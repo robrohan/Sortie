@@ -25,7 +25,7 @@ Tests.test_SortieCoreExists = function() {
 	}
 }
 
-Tests.test_SortieCoreImport = function() {
+Tests.test_SortieCoreInclude = function() {
 	Sortie.Core.$({
 		include:new Array(
 			"Sortie/Util/Cookie.js",
@@ -38,8 +38,7 @@ Tests.test_SortieCoreImport = function() {
 		)
 	});
 		
-	Sortie.Core.Import(true);
+	Sortie.Core.Include(true);
 	
 	return JUAssert.pass();
-	//return JUAssert.fail();
 }

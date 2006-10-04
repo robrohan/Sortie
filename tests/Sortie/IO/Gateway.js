@@ -2,7 +2,7 @@ Tests.test_GatewayCreate = function() {
 	log.debug("Testing Sortie.IO.Gateway version: " + Sortie.IO.Gateway["VERSION"])
 	
 	try {
-		var p = new Sortie.IO.Pipe();
+		var p = new Sortie.IO.Pipe().GetInstance();
 	} catch(e) {
 		return JUAssert.fail();
 	}
@@ -35,7 +35,7 @@ Tests.test_LoadXMLFile = function()
 	try {
 		gateway.DoRequest({
 			method:"GET",
-			url:"form.xml", 
+			url:"SortieData/form.xml", 
 			handler:myHandler
 		});
 	} catch(e) {
