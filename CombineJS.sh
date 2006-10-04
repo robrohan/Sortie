@@ -4,11 +4,15 @@
 # 2 = the new file name
 # 3 = the copyright
 
-ALL_JS_FILES=`find $1 -name "*.js"`
+MAIN_FILE="Sortie.js"
+MAIN_JS_FILE=`find $1 -name "*.js" | grep $MAIN_FILE`
+OTHER_JS_FILES=`find $1 -name "*.js" | grep -v $MAIN_FILE`
+
 OUT_FILE=$2
 COPYRIGHT=$3
 
-cat $ALL_JS_FILES > "$1/$2_temp"
+cat $MAIN_JS_FILE > "$1/$2_temp"
+cat $OTHER_JS_FILES >> "$1/$2_temp"
 
 ./jsmin < "$1/$2_temp" > "$1/$2" "$COPYRIGHT"
 
