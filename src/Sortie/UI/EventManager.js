@@ -10,11 +10,13 @@
  * To register, make a function that takes one parameter. The parameter will be
  * the event object, and will get passed in by the manager to your function when
  * the event gets fired. So for example the following code creates an alert box
- * when anything on the page is clicked:
+ * when anything on the page is clicked
+ *
  * (code)
  * 	click_happened = function(event){ alert(event.target) };
  * 	neuro_addClickListener(click_happened);
  * (end code)
+ * 
  * The event object has a few tweaks to make it act the same on all browsers, but 
  * the most common part of the event is the _target_ property which points 
  * to the item that fired the event.
@@ -24,14 +26,8 @@
  *
  * Related:
  * 	Util/Browser.js
- * 	Util/Log.js
  */
 if(!Sortie.UI) Sortie.UI = {};
-
-/* if(typeof BROWSER_SNIFFER_VERSION == "undefined" || DEBUG_VERSION == "undefined" ) {
-	alert("Fatal Error: EventManager is missing required libraries");
-	throw new Error("ui/events/eventmanager.js missing required libraries");
-} */
 
 Sortie.Core.$({
 	require:new Array(
@@ -39,54 +35,56 @@ Sortie.Core.$({
 	)
 });
 
-/** 
- * Variable: SysDocument - a handle to (or wrapper for) the document 
+/**
+ * Class: EventManager
+ * Allows delegation of browser events (key press, mouse move, etc)
+ * so any process can be notified of an event. Simply add a listener
+ * using one fo the Add functions.
+ * A listener is a function that takes a single parameter. When called
+ * the passed parameter will be the event object.
+ * 
+ * Namespace:
+ * 	Sortie.UI
  */
-/* SysDocument = document;
-
-if(SysDocument.captureEvents)
-{
-	//non IE
-	if(Event.MOUSEMOVE)
-	{
-		//NS 4, NS 6, Mozilla 0.9.x
-		SysDocument.captureEvents(Event.MOUSEMOVE);
-	}
-}*/
-
 Sortie.UI.EventManager = function() {
-		
-	////////////////////////////////////////////////////////////////////////////////
 	/** 
-	 * Variable: onloadListeners all the load listeners 
+	 * Variable: EventManager.onloadListeners
+	 * all the load listeners 
 	 */
 	this.onloadListeners		= new Array();
 	/** 
-	 * Variable:  neuro_clickListeners array of click listeners 
+	 * Variable: EventManager.clickListeners
+	 * array of click listeners 
 	 */
 	this.clickListeners		= new Array();
 	/** 
-	 * Variable: neuro_mdownListeners all the mouse down listeners 
+	 * Variable: EventManager.mdownListeners
+	 * all the mouse down listeners 
 	 */
 	this.mdownListeners		= new Array();
 	/** 
-	 * Variable:  neuro_mupListeners mouse up listeners 
+	 * Variable: EventManager.mupListeners
+	 * mouse up listeners 
 	 */
 	this.mupListeners			= new Array();
 	/** 
-	 * Variable:  neuro_moveListeners array of mouse move listeners
+	 * Variable: EventManager.moveListeners
+	 * array of mouse move listeners
 	 */
 	this.moveListeners			= new Array();
 	/** 
-	 * Variable:  neuro_keyDownListeners key down listeners 
+	 * Variable: EventManager.keyDownListeners
+	 * key down listeners 
 	 */
 	this.keyDownListeners 		= new Array();
 	/** 
-	 * Variable:  neuro_keyUpListeners  key up listeners 
+	 * Variable: EventManager.keyUpListeners
+	 * key up listeners 
 	 */
 	this.keyUpListeners		= new Array();
 	/** 
-	 * Variable:  neuro_keyPressListeners key press listeners 
+	 * Variable: EventManager.keyPressListeners
+	 * key press listeners 
 	 */
 	this.keyPressListeners		= new Array();
 	
@@ -94,6 +92,17 @@ Sortie.UI.EventManager = function() {
 	
 	////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Method: EventManager.Init
+	 * Link the event manager to a document. Often this is simply
+	 * (code)
+	 * var em = new Sortie.UI.EventManager();
+	 * em.Init(document);
+	 * (end code)
+	 *
+	 * Parameters:
+	 * 	 docu - the document to handle events for
+	 */
 	this.Init = function(docu) {
 		this.doc = docu;
 		var emptr = this;
@@ -109,7 +118,7 @@ Sortie.UI.EventManager = function() {
 	
 	
 	/**
-	 * Function: addLoadListener
+	 * Method: EventManager.AddLoadListener
 	 * register an onload listner
 	 * 
 	 * Parameters:
@@ -120,7 +129,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_addMouseDownListener
+	 * Method: EventManager.AddMouseDownListener
 	 * register a mouse down listener
 	 * 
 	 * Parameters:
@@ -131,7 +140,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_addMouseUpListener
+	 * Method: EventManager.AddMouseUpListener
 	 * register a mouse up listener
 	 * 
 	 * Parameters: 
@@ -142,7 +151,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_addClickListener
+	 * Method: EventManager.AddClickListener
 	 * register a click listener
 	 *
 	 * Parameters: 
@@ -154,7 +163,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_addMoveListener
+	 * Method: EventManager.AddMoveListener
 	 * register a move listener
 	 *
 	 * Parameters: 
@@ -166,7 +175,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_addKeyDownListener
+	 * Method: EventManager.AddKeyDownListener
 	 * add a keyDownListener
 	 *
 	 * Parameters: 
@@ -177,7 +186,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_addKeyUpListener
+	 * Method: EventManager.AddKeyUpListener
 	 * add a keyUpListener
 	 *
 	 * Parameters: 
@@ -188,7 +197,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_addKeyPressListener
+	 * Method: EventManager.AddKeyPressListener
 	 * add a key press Listener
 	 *
 	 * Parameters: 
@@ -205,9 +214,8 @@ Sortie.UI.EventManager = function() {
 		arry[arry.length] = func;
 	}
 	
-
 	/**
-	 * Function: __normalizeEvent
+	 * Method: EventManager.__normalizeEvent
 	 * helper function to handle IE bug for even handling - mostly makes just makes 
 	 * sure an event is an event. Not really an API function but it might be useful
 	 * out side this library.
@@ -324,8 +332,9 @@ Sortie.UI.EventManager = function() {
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////////
+	
 	/**
-	 * Function: neuro_getKeyCodeFromEvent
+	 * Method: EventManager.GetKeyCodeFromEvent
 	 * Gets the key code from an event i.e. 65
 	 *
 	 * Parameter: 
@@ -342,7 +351,7 @@ Sortie.UI.EventManager = function() {
 	}
 	
 	/**
-	 * Function: neuro_getKeyFromEvent
+	 * Method: EventManager.GetKeyFromEvent
 	 * Gets the key from an event i.e. "A"
 	 *
 	 * Parameters:
@@ -359,25 +368,8 @@ Sortie.UI.EventManager = function() {
 
 /////////////////////META DATA //////////////////////////////////////////////
 /** 
- * Variable: Sortie.Util.Properties.VERSION 
+ * Variable: Sortie.Util.EventManager.VERSION 
  * 	the current version 
  */
 Sortie.UI.EventManager["VERSION"] = "0.2";
 ///////////////////////////////////////////////////////////////////////////
-
-
-/* 
- * Register the handler with the document
- * setup Neuromancer to handle events.
- * onClick(), onDblClick(), onKeyDown(), 
- * onKeyPress(), onKeyUp(), onMouseDown(), 
- * onMouseUp() 
- */
-/* SysDocument.onmousemove     = _checkMove;
-SysDocument.onmousedown     = _checkMDown;
-SysDocument.onmouseup       = _checkMUp;
-SysDocument.onclick         = _checkClick;
-SysDocument.onkeydown       = _checkKeyDown;
-SysDocument.onkeyup         = _checkKeyUp;
-SysDocument.onkeypress      = _checkKeyPress;
-window.onload               = _checkOnLoad; */

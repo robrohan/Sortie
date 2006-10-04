@@ -1,19 +1,21 @@
 /**
  * File: Util/Properties.js
- *
+ * Allows access to, and maipulation of, properites files. These are
+ * files that have name value pairs. An example of a file would be:
+ * (code)
+ * #this is a coment
+ * myprop=this one here
+ * other.prop=343444
+ * (end code)
+ * 
  * Copyright: 
- * 	2006 Rob Rohan (robrohan@gmail.com) All rights reserved
+ * 	2005-2006 Rob Rohan (robrohan@gmail.com) All rights reserved
  *
  * Related:
  *	Util/Collections.js
  */
 if(!Sortie.Util) Sortie.Util = {};
 
-/*if(typeof COLLECTIONS_VERSION == "undefined" || typeof OUTPUT_VERSION == "undefined")
-{
-	alert("Fatal Error: Properties is missing required libraries");
-	throw new Error("Properties.js missing required libraries");
-} */
 Sortie.Core.$({
 	require:new Array(
 		{ c:"Sortie.Util.Collections", v:"0.2"}
@@ -21,8 +23,11 @@ Sortie.Core.$({
 });
 
 /**
- * Class: Sortie.Util.Properties
- * 
+ * Class: Properties
+ * Class to deal with properies files.
+ *
+ * Namespace:
+ * 	Sortie.Util
  */
 Sortie.Util.Properties = function() {
 	this.map = new Sortie.Util.Map();
@@ -104,7 +109,7 @@ Sortie.Util.Properties = function() {
 	 * 	defaultValue - (optional) the value to return if the key is not found
 	 *
 	 * Returns:
-	 *  the property as a string, the default value, or null	
+	 *  the property as a string, the default value, or null
 	 */
 	this.GetProperty = function(key, defaultValue) {
 		var value = this.map.Get(key);
@@ -132,11 +137,15 @@ Sortie.Util.Properties = function() {
 	
 	/**
 	 * Method: Properties.Store
-	 * 
+	 * Writes the properties to string for storage into a cookie
+	 * or xmlhttp
+	 *
 	 * Parameters:
-	 * 	style - null=plain text, 2=escaped, 3=base64ed
+	 * 	style - null=plain text, 2=escaped
 	 * 	header - the header to put at the top of the file (string) can be null
+	 *
 	 * Return:
+	 * This object in a string form ready for saving
 	 */
 	this.Store = function(style, header) {
 		var mapkeys = this.map.GetKeysAsArray();

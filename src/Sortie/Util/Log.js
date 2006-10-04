@@ -1,18 +1,21 @@
 /**
  * File: Util/Log.js
- * Creates a simple logger to help debug javascript. It will open a new window so popup
- * blocking may keep it from working.
+ * Creates a simple logger to help debug javascript. By default it will open a new 
+ * window so popup blocking may keep it from working. However, you can redirect the
+ * log to a text area or a div if you wish.
  *
  * Copyright: 
  * 	2005-2006 Rob Rohan (robrohan@gmail.com)
  */
 if(!Sortie.Util) Sortie.Util = {};
 
-/////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Class: Log
  * Constructor for the logging window (or other std output if implemented)
+ * 
+ * Namespace:
+ * 	Sortie.Util
  */
 Sortie.Util.Log = function() {
 	/** 
@@ -20,7 +23,16 @@ Sortie.Util.Log = function() {
 	 * Basic log. Opens a new window and appends output to the new window
 	 */
 	this.NEW_WINDOW		= 0;
+	/** 
+	 * Variables: Log.TEXT_AREA
+	 * log to a text area
+	 */
 	this.TEXT_AREA 		= 1;
+	
+	/** 
+	 * Variables: Log.STRING_BUFFER
+	 * log to a string (not implemented)
+	 */
 	this.STRING_BUFFER 	= 2;
 	
 	/** 
@@ -36,22 +48,22 @@ Sortie.Util.Log = function() {
 	this.USER_DIV	= 4;
 	
 	/** 
-	 * Variable: TYPE_DEBUG 
+	 * Variable: Log.TYPE_DEBUG 
 	 * 	used within the class to tell what type of event 
 	 */
 	this.TYPE_DEBUG = "DEBUG";
 	/**
-	 * Variable: TYPE_WARN 
+	 * Variable: Log.TYPE_WARN 
 	 * 	used within the class to tell what type of event 
 	 */
 	this.TYPE_WARN  = "WARN";
 	/**
-	 * Variable: TYPE_INFO 
+	 * Variable: Log.TYPE_INFO 
 	 *	used within the class to tell what type of event 
 	 */
 	this.TYPE_INFO  = "INFO";
 	/**
-	 * Variable: TYPE_ERROR 
+	 * Variable: Log.TYPE_ERROR 
 	 * 	used within the class to tell what type of event 
 	 */
 	this.TYPE_ERROR = "ERROR";
@@ -65,13 +77,13 @@ Sortie.Util.Log = function() {
 	this.type = this.NEW_WINDOW;
 	
 	/**
-	 * Method: Log.init
+	 * Method: Log.Init
 	 * Start up the log object and make sure any supporting items are created
 	 * a new window for example. Will check the DEBUG flag and send
 	 * any text to /dev/null if not in debug mode (i.e. DEBUG set to false)
 	 */
 	this.Init = function() {
-		if(DEBUG) {
+		if(Sortie.DEBUG) {
 			//there will be more of these at some point
 			switch(this.type) {
 				case this.NEW_WINDOW:
@@ -86,17 +98,26 @@ Sortie.Util.Log = function() {
 			}
 			
 			this.running = true;
-			this.info("Log (re)init...",this);
+			this.Info("Log (re)init...",this);
 		}
 	};
 	
 	/**
-	 * Method: Log.redirect
+	 * Method: Log.Redirect
 	 * Changes the output of the error log to go to the predefined area (see the Log
-	 * constants)
+	 * constants). Often you'll want to set this before you run Init
+	 *
+	 * Parameters
+	 * 	to - where to send the output (see the log constants)
+	 *
+	 * See Also:
+	 * <Log.NEW_WINDOW>
+	 * <Log.CONSOLE>
+	 * <Log.USER_DIV>
+	 * <Log.TEXT_AREA>
+	 * <Log.STRING_BUFFER>
 	 */
-	this.Redirect = function(to)
-	{
+	this.Redirect = function(to) {
 		this.type = to;
 	};
 	
@@ -206,41 +227,38 @@ Sortie.Util.Log = function() {
 	};
 	
 	/**
-	 * Method: Log.debug
+	 * Method: Log.Debug
 	 * Write a debug line to the log
 	 *
 	 * Parameters:
 	 * 	line - the text for the log
 	 * 	object - (optional) the object this line is from "NO OBJECT" default
 	*/
-	this.Debug = function(line, object)
-	{
+	this.Debug = function(line, object) {
 		this.__write(this.TYPE_DEBUG, object, line);
 	};
 	
 	/**
-	 * Method: Log.info
+	 * Method: Log.Info
 	 * Write an info line to the log
 	 *
 	 * Parameters:
 	 * 	line - the text for the log
 	 * 	object - (optional) the object this line is from "NO OBJECT" default
 	*/
-	this.Info = function(line, object)
-	{
+	this.Info = function(line, object) {
 		this.__write(this.TYPE_INFO, object, line);
 	};
 	
 	/**
-	 * Method: Log.warn
+	 * Method: Log.Warn
 	 * Write a warn line to the log
 	 *
 	 * Parameter:
 	 * 	line - the text for the log
 	 * 	object - (optional) the object this line is from "NO OBJECT" default
 	 */
-	this.Warn = function(line, object)
-	{
+	this.Warn = function(line, object) {
 		this.__write(this.TYPE_WARN, object, line);
 	};
 	
@@ -252,8 +270,7 @@ Sortie.Util.Log = function() {
 	 * 	object - (optional) the object this line is from "NO OBJECT" default
 	 *
 	 */
-	this.Error = function(line, object)
-	{
+	this.Error = function(line, object) {
 		this.__write(this.TYPE_ERROR, object, line);
 	};
 }
@@ -261,7 +278,7 @@ Sortie.Util.Log = function() {
 
 /////////////////////META DATA //////////////////////////////////////////////
 /** 
- * Variable: Sortie.Util.Properties.VERSION 
+ * Variable: Sortie.Util.Log.VERSION 
  * 	the current version 
  */
 Sortie.Util.Log["VERSION"] = "0.2";

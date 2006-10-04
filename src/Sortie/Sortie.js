@@ -1,21 +1,35 @@
-
+/**
+ * File: Sortie/Sortie.js
+ * Main file for Sortie. Contains the Sortie namespace and the
+ * Sorite.Core preprocessor
+ *
+ * Copyright:
+ * 	2005-2006 Rohan (robrohan@gmail.com). All rights reserved
+ */
+ 
 Sortie = {};
+
 /** 
  * Variable: Sortie.VERSION 
  * 	the current version 
  */
 Sortie.VERSION = "0.5";
+
 /**
  * Variable: Sortie.DEBUG 
- * 	set this to true to turn on debug mode
+ * 	set this to true to turn on debug mode and use this in
+ * your code if you want to branch based on debug mode
  */
 Sortie.DEBUG = false;
 /////////////////////////////////////////////////////////////////////
 
 /**
- * Class: Sortie.Core
- * Core acts as a pre processor
- *
+ * Class: Core
+ * Core acts as a pre processor. You can use Core in include javascript
+ * libraries from with javascript code, and you can also ad "require"
+ * statements to your libraries if your library depends on some other
+ * library. For example, to include libraries - from your applications
+ * main startup area you could do the following:
  * (code)
  * Sortie.Core.$({
  * 		include:new Array(
@@ -23,14 +37,40 @@ Sortie.DEBUG = false;
  * 			"Code/Util/Search.js"
  * 		)
  * });
- * 
- * +======================================+
- * | Command        | Params              |
- * +======================================+
- * | require        | Array of variables  |
- * | include        | Array of filenames  |
- * +======================================|
  * (end code)
+ * After you have all the js files the application needs you call
+ * _Sortie.Core.Include()_ to load all the libraries. See the Events.html example
+ * for a working example.
+ * In addition to including files, your library can use Core to check to
+ * see if a required library exists.
+ * To check, in your library code, you add something like the following 
+ * at the start of the file:
+ * (code)
+ * Sortie.Core.$({
+ *		require:new Array(
+ *			{ c:"Sortie.Util.Collections", v:"0.2"},
+ *			{ c:"Some.Other.Class" }
+ *		)
+ * });
+ * (end code)
+ * _c_ stands for class, and _v_ stands for version. Version is optional, but
+ * if the libaray adds metadata to the class (the "VERSION" property) the
+ * version is checked and if older than required there is an error.
+ * After the Sortie.Core.Include() is run, the environment is checked for the
+ * existence of the class (or function) passed in _c_.
+ * At present the _require_ and _include_ commands are the only supported pre
+ * processor commands.
+ * (code) 
+ *  \======================================/
+ *  | Command        | Params              |
+ *  \======================================/
+ *  | require        | Array of variables  |
+ *  | include        | Array of filenames  |
+ *  \======================================/
+ * (end code)
+ *
+ * Namespace:
+ * 	Sortie
  */
 Sortie.CoreImpl = function() {
 	/////////////// loaded libs /////////////////////
@@ -93,15 +133,7 @@ Sortie.CoreImpl = function() {
 		}
 	};
 	
-	/**
-	 * Method: Core.VerifyDependencies
-	 * 	
-	 *
-	 * Parameters:
-	 * 	
-	 * Returns:
-	 * 	
-	 */
+	/* internal only */
 	this.VerifyDependencies = function() {
 		var reqlen = this.__NEURO_REQUIRES.length;
 		
@@ -128,21 +160,8 @@ Sortie.CoreImpl = function() {
 		}
 	};
 	
-	/*
-	 * Function: neuro_registerLibrary
-	 * Lets any one who cares knows that this library version was loaded
-	 *
-	 * Parameters:
-	 * 	key
-	 * 	version
-	 */
-	/*this.RegisterLibrary = function(key, version)
-	{
-		__NEURO_LOADED_LIBS[key] = version
-	} */
-
 	/**
-	 * Method: Core.Import
+	 * Method: Core.Include
 	 * Function to write out all the files to be included
 	 */
 	this.Include = function(debug) {
@@ -173,5 +192,3 @@ Sortie.Core = new Sortie.CoreImpl();
  */
 Sortie.Core.VERSION = "0.5";
 //////////////// META DATA////////////
-
-

@@ -8,14 +8,14 @@
 
 if(!Sortie.Util) Sortie.Util = {};
 
-/**
- * Namespace: Sortie.Util.Collections
- */
 if(!Sortie.Util.Collections) Sortie.Util.Collections = {};
 
 /**
- * Class: Sortie.Util.Collection
+ * Class: Collection
  * Base object for the collections objects List and Set
+ *
+ * Namespace:
+ * 	Sortie.Util
  */
 Sortie.Util.Collection = function() {
 	this.avalues = new Array();
@@ -23,7 +23,7 @@ Sortie.Util.Collection = function() {
 	
 	
 	/**
-	 * Method: Sortie.Util.Collection.Size
+	 * Method: Collection.Size
 	 * 	gets the size of this map object
 	 *
 	 * Return:
@@ -34,7 +34,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.Clear
+	 * Method: Collection.Clear
 	 * Removes all of the elements from this list optional operation. 
 	 */
 	this.Clear = function() {
@@ -44,7 +44,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.ToArray
+	 * Method: Collection.ToArray
 	 * Returns an array containing all of the elements in this list in proper sequence.
 	 * 
 	 * Return: Object[]
@@ -54,7 +54,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.Contains
+	 * Method: Collection.Contains
 	 * Returns true if this list contains the specified element.
 	 * 
 	 * Parameters: 
@@ -71,7 +71,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.IndexOf
+	 * Method: Collection.IndexOf
 	 * Returns the index in this list of the first occurrence of the specified 
 	 * element, or -1 if this list does not contain this element.
 	 * 
@@ -92,7 +92,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.IsEmpty
+	 * Method: Collection.IsEmpty
 	 * Returns true if this list contains no elements.
 	 *
 	 * Return:
@@ -106,7 +106,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.LastIndexOf
+	 * Method: Collection.LastIndexOf
 	 * Returns the index in this list of the last occurrence of the specified element, 
 	 * or -1 if this list does not contain this element.
 	 *
@@ -128,7 +128,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.Get
+	 * Method: Collection.Get
 	 * Returns the element at the specified position in this list.
 	 * 
 	 * Parameters:
@@ -148,7 +148,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.Remove
+	 * Method: Collection.Remove
 	 * Removes the first occurrence in this list of the specified element (optional 
 	 * operation). 
 	 *
@@ -164,7 +164,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.RemoveByIndex
+	 * Method: Collection.RemoveByIndex
 	 * Removes the element at the specified position in this list (optional operation).
 	 * 
 	 * Parameters: 
@@ -182,7 +182,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.Set
+	 * Method: Collection.Set
 	 * Replaces the element at the specified position in this list with the specified element 
 	 * (optional operation).
 	 *
@@ -197,7 +197,7 @@ Sortie.Util.Collection = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.Collection.ToString
+	 * Method: Collection.ToString
 	 * Show the collection contents
 	 *
 	 * Returns:
@@ -224,12 +224,15 @@ Sortie.Util.Collection = function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * Class: Sortie.Util.List
+ * Class: List
  * A list of elements. More or less an array with search functions
  * An ordered collection (also known as a sequence). The user of this object
  * has precise control over where in the list each element is inserted. The user 
  * can access elements by their integer index (position in the list), and search for 
  * elements in the list. Extends Collection
+ *
+ * Namespace:
+ * 	Sortie.Util
  *
  * See Also: 
  * 	<Collection>
@@ -239,7 +242,7 @@ Sortie.Util.List = function() {
 	this.asize = -1;
 	
 	/**
-	 * Method: Sortie.Util.List.Add
+	 * Method: List.Add
 	 * Appends the specified element to the end of this list (optional operation).
 	 *
 	 * Parameters:
@@ -254,7 +257,7 @@ Sortie.Util.List = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.List.ToThinList
+	 * Method: List.ToThinList
 	 * Turns this List (array backed) into a string list, or "thin list" using
 	 * sep as the separator
 	 *
@@ -269,7 +272,7 @@ Sortie.Util.List = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.List.FromThinList
+	 * Method: List.FromThinList
 	 * creates a list from a "thin list" list using separator sep
 	 *
 	 * Parameters:
@@ -283,7 +286,7 @@ Sortie.Util.List = function() {
 	};
 	
 	/**
-	 * Method: Sortie.Util.List.ToString
+	 * Method: List.ToString
 	 * Show the list contents
 	 *
 	 * Returns:
@@ -307,7 +310,7 @@ Sortie.Util.List = function() {
 	
 		
 	/**
-	 * Method: Sortie.Util.List.ToWSArray
+	 * Method: List.ToWSArray
 	 * This is kind of weak and not very expandable, but its only used when
 	 * this object is supposed to go to a web service and it requires the
 	 * gateway
@@ -338,9 +341,12 @@ Sortie.Util.List.prototype = new Sortie.Util.Collection();
 /////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * Class: Sortie.Util.Set
+ * Class: Set
  * Set keeps a unique list of elements and wont allow nulls or
  * undefined values. Extends Collection
+ *
+ * Namespace:
+ * 	Sortie.Util
  *
  * See Also: 
  * 	<Collection>
@@ -351,7 +357,7 @@ Sortie.Util.Set = function()
 	this.asize = -1;
 	
 	/**
-	 * Method: Sortie.Util.Set.Add
+	 * Method: Set.Add
 	 * Adds the specified element to this set if it is not already present optional operation.
 	 *
 	 * Returns:
@@ -371,6 +377,9 @@ Sortie.Util.Set.prototype = new Sortie.Util.Collection();
 /**
  * Class: Map
  * Simple Map object with a lame seaching algorithm.
+ * 
+ * Namespace:
+ * 	Sortie.Util
  */
 Sortie.Util.Map = function()
 {
@@ -379,7 +388,7 @@ Sortie.Util.Map = function()
 	this.asize = -1;
 	
 	/**
-	 * Method: Map.put
+	 * Method: Map.Put
 	 * adds a name value pair
 	 *
 	 * Parameters: 
@@ -402,7 +411,7 @@ Sortie.Util.Map = function()
 	
 	
 	/**
-	 * Method: Map.getKeysAsArray
+	 * Method: Map.GetKeysAsArray
 	 * gets all the keys from this map as an array
 	 *
 	 * Returns:
@@ -414,7 +423,7 @@ Sortie.Util.Map = function()
 	
 	
 	/**
-	 * Method: Map.get
+	 * Method: Map.Get
 	 * Gets a value from a key
 	 *
 	 * Parameters:
@@ -434,7 +443,7 @@ Sortie.Util.Map = function()
 	};
 	
 	/**
-	 * Method: Map.remove
+	 * Method: Map.Remove
 	 * Removes the first occurrence in this map of the specified key
 	 *
 	 * Parameter:
@@ -446,7 +455,7 @@ Sortie.Util.Map = function()
 	};
 	
 	/**
-	 * Method: Map.contains
+	 * Method: Map.Contains
 	 * see if keyname is already in this map lame algorithm
 	 *
 	 * Parameters: 
@@ -468,7 +477,7 @@ Sortie.Util.Map = function()
 	};
 	
 	/**
-	 * Method: Map.containsNoCase
+	 * Method: Map.ContainsNoCase
 	 * see if keyname is already in this map ignoring case
 	 *
 	 * Parameters: 
@@ -492,7 +501,7 @@ Sortie.Util.Map = function()
 	};
 	
 	/**
-	 * Method: Map.indexOf
+	 * Method: Map.IndexOf
 	 * Returns the index the key or -1 if this map does not contain the key
 	 *
 	 * Parameters:
@@ -514,7 +523,7 @@ Sortie.Util.Map = function()
 	
 	
 	/**
-	 * Method: Map.removeByIndex
+	 * Method: Map.RemoveByIndex
 	 * Removes the element at the specified position in this list (optional operation).
 	 */
 	this.RemoveByIndex = function(index) {
@@ -529,7 +538,7 @@ Sortie.Util.Map = function()
 	};
 	
 	/**
-	 * Method: Map.size
+	 * Method: Map.Size
 	 * gets the size of this map object
 	 *
 	 * Returns:
@@ -540,7 +549,7 @@ Sortie.Util.Map = function()
 	};
 	
 	/**
-	 * Method: Map.toWSStruct
+	 * Method: Map.ToWSStruct
 	 * Put this whole map, including sub maps, into a xml fragment to send to the web service
 	 *
 	 * Parameters:
@@ -594,7 +603,7 @@ Sortie.Util.Map = function()
 	
 	
 	/**
-	 * Method: Map.toString
+	 * Method: Map.ToString
 	 * the ol'toString
 	 *
 	 * Returns:

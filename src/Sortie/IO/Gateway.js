@@ -4,18 +4,14 @@
  * XMLHTTPRequest object in a non-browser specific way.
  *
  * Copyright:
- * 	2004-2006 Rob Rohan (robrohan@gmail.com) - All rights reserved
+ * 	2004-2006 Rob Rohan (robrohan@gmail.com). All rights reserved
  *
  * Related:
  * 	Util/Collections.js
+ * 	Util/Browser.js
  */
 
 if(!Sortie.IO) Sortie.IO = {};
-/* if(typeof COLLECTIONS_VERSION == "undefined" || typeof BROWSER_SNIFFER_VERSION == "undefined")
-{
-	alert("Fatal Error: Gateway Missing Required Libraries");
-	throw new Error("gateway.js Missing Required Libraries");
-} */
 
 if(!Sortie.IO) Sortie.IO.Gateway = {};
 
@@ -26,20 +22,25 @@ Sortie.Core.$({
 	)
 });
 
-
 /**
- * Class: HTTPConnectFactory
+ * Class: Pipe
  * This creates a HTTPConnection factory that can produce http connetion object 
  * that are IE and Mozilla capable they can be used to GET and POST to a server
- * It is oftend used in one go like: http = new HTTPConnectFactory().getInstance();
- * 
+ * It is oftend used in one go like: 
+ * (code)
+ * var pipe = new Sortie.IO.Pipe().GetInstance();
+ * (end code)
+ *
+ * Namespace: 
+ * 	Sortie.IO
+ *
  * Returns:
  * 	a factory to create xmlhttprequest objects with
  */ 
 Sortie.IO.Pipe = function() {
 
 	/**
-	 * Method: HTTPConnectFactory.getInstance
+	 * Method: Pipe.GetInstance
 	 * get an instace of the http connect object this actually just creates 
 	 * either an MS or Gecko type object.
 	 *
@@ -95,9 +96,12 @@ Sortie.IO.Pipe = function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * Class: JSRemote
+ * Class: Gateway
  * This object handles sending. This can be used to send and receive data from the 
  * server
+ *
+ * Namespace:
+ * 	Sortie.IO
  *
  * Parameters:
  * 	connection - an XMLHTTPRequest object from the HTTPConnectFactory used to send and receive with
@@ -112,7 +116,7 @@ Sortie.IO.Gateway = function(connection, asyn) {
 	this.username = null;
 	this.password = null;
 	
-		/**
+	/**
 	 * Method: Gateway.DoRequest
 	 * Used to do an actual request. Pass in an anon object with the
 	 * connection specifics. For example:
@@ -129,7 +133,7 @@ Sortie.IO.Gateway = function(connection, asyn) {
 	 * (end code)
 	 *
 	 * Parameters:
-	 * 	params - an object that has the following properties
+	 * 	params - an object that has some combo of the following properties
 	 * (code)
 	 * 		method = GET,POST,DELETE,PUT,etc
 	 *		url = where to call to
@@ -206,7 +210,7 @@ Sortie.IO.Gateway = function(connection, asyn) {
 	};
 	
 	/**
-	 * Method: JSRemote.DoFormPostRequest
+	 * Method: Gateway.DoFormPostRequest
 	 * This method implements a multi-field form submission via a POST,
 	 * using the 'fields' object as a set of name:value pairs to pass as
 	 * the form fields.  It simply delegates to doPostRequest for the
@@ -241,7 +245,7 @@ Sortie.IO.Gateway = function(connection, asyn) {
 
 /////////////////////META DATA //////////////////////////////////////////////
 /** 
- * Variable: Sortie.Util.Properties.VERSION 
+ * Variable: Sortie.Util.Gateway.VERSION 
  * 	the current version 
  */
 Sortie.IO.Gateway["VERSION"] = "0.2";

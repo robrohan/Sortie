@@ -1,16 +1,23 @@
 /**
  * File: UI/Screen.js
- * 
+ * Functions that help get information from and about the screen
  *
  * Copyright:
- * 	2006 Rohan (robrohan@gmail.com)
+ * 	2006 Rob Rohan (robrohan@gmail.com). All rights reserved
  */
 if(!Sortie.UI) Sortie.UI = {};
 
+/**
+ * Class: Screen
+ * Functions that help get information from and about the screen
+ *
+ * Namespace:
+ * 	Sortie.UI
+ */
 Sortie.UI.Screen = function() {
 
 	/**
-	 * Function: findPosX
+	 * Method: Screen.FindPosX
 	 * Finds the current X position of the passed in object
 	 *
 	 * From:
@@ -39,7 +46,7 @@ Sortie.UI.Screen = function() {
 	};
 	
 	/**
-	 * Function: findPosY
+	 * Method: Screen.FindPosY
 	 * Finds the current Y position of the passed in object
 	 * 
 	 * From:

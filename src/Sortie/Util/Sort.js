@@ -1,19 +1,20 @@
 /**
  * File: Util/Sort.js
+ * Sort related objects
  * 
  * Copyright:
  * 	2004-2006 Rob Rohan (robrohan@gmail.com)
  */
 if(!Sortie.Util) Sortie.Util = {};
 
-/**
- * Namespace: Sortie.Util.Sort
- */
 if(!Sortie.Util.Sort) Sortie.Util.Sort = {};
 
 /**
- * Class: Sortie.Util.QuickSort
+ * Class: QuickSort
  * Quick sort object
+ *
+ * Namespace:
+ * 	Sortie.Util
  */
 Sortie.Util.QuickSort = function() {
 	

@@ -1,26 +1,28 @@
 /**
  * File: Util/Search.js
+ * Search related objects
  * 
  * Copyright:
  * 	2004-2006 Rob Rohan (robrohan@gmail.com)
- *
  */
 
 if(!Sortie.Util) Sortie.Util = {};
 
-/**
- * Namespace: Sortie.Util.Search
- */
 if(!Sortie.Util.Search) Sortie.Util.Search = {};
 
 /**
- * Class: Sortie.Util.BinarySearch
+ * Class: BinarySearch
+ * Binary search object
+ *
+ * Namespace:
+ * 	Sortie.Util
  */
 Sortie.Util.BinarySearch = function() {
 	
 	/**
-	 * Class: HitArea
-	 * return class from binary search.
+	 * Method: HitArea
+	 * return class from binary search. This is used
+	 * As a Class
 	 */
 	this.HitArea = function() {
 		this.upper = 0;
@@ -81,5 +83,4 @@ Sortie.Util.BinarySearch = function() {
  */
 Sortie.Util.Search["VERSION"] = "0.5";
 ///////////////////////////////////////////////////////////////////////////
-
 

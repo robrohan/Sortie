@@ -1,27 +1,22 @@
 /**
  * File: UI/Mouse.js
  * This library creates an object that can be used to track the current 
- * mouse position. This library creates and object called *SysMouse* which is 
- * an instance of SystemMouse described here (meaning you'll probably never need
- * to make an instance of SystemMouse). To enable tracking, register the 
- * neuro_trackMouse method with the event manager or with the document mouse move
- * event. For example when using the eventmanager.js you can do the 
- * following:
+ * mouse position. This library creates and object called *Mouse* which is 
+ * an instance of MouseImpl described here (meaning you'll probably never need
+ * to make an instance of MouseImpl).
  *
  * (start code)
- *	//register the mouse tracker
- *	neuro_addMoveListener(neuro_trackMouse);
- *			
- *	mouse_moved = function(event){
- *		alert("move: " + SysMouse.X + " " + SysMouse.Y); 
- *	};
- *	neuro_addMoveListener(mouse_moved);
+ *		em.AddMoveListener(
+ *			function(e) {
+ *				Sortie.UI.Mouse.SetCoords(e);
+ *				window.status = "X: " + Sortie.UI.Mouse.X + " Y:" + Sortie.UI.Mouse.Y;
+ *			}
+ *		);
  * (end)
- *
- * that will alert the X and Y position on every mouse move.
+ * that will set the windows status to the X and Y position on every mouse move for example.
  *
  * Copyright: 
- * 	2005 Rob Rohan (robrohan@gmail.com)
+ * 	2005-2006 Rob Rohan (robrohan@gmail.com)
  */
 if(!Sortie.UI) Sortie.UI = {};
 
@@ -29,18 +24,17 @@ if(!Sortie.UI) Sortie.UI = {};
  * Class: MouseImpl
  * Constructor for SystemMouse this holds the current mouse position on the 
  * screen in X and Y
+ *
+ * Namespace:
+ * 	Sortie.UI
  */
 Sortie.UI.MouseImpl = function() {
 	this.X = 0;
 	this.Y = 0;
 	
 	/**
-	 * Method: SystemMouse.SetMouseCoords
-	 * gets the current mouse position and puts it into the SysMouse object
-	 * this is not really an API call; however it needs to get envoked on window mouse move
-	 * events to be of any help. For example using the neuro event model:
-	 *
-	 * neuro_addMoveListener(SysMouse.setMouseCoords);
+	 * Method: MouseImpl.SetCoords
+	 * gets the current mouse position and puts it into the MouseImpl object
 	 *
 	 * Parameters:
 	 * 	e - the event
@@ -87,10 +81,9 @@ Sortie.UI.MouseImpl = function() {
 
 /**
  * Variable: Sortie.UI.Mouse 
- * An instance of SystemMouse for use in your everyday code 
+ * An instance of MouseImpl for use in everyday code 
  */
 Sortie.UI.Mouse = new Sortie.UI.MouseImpl();
-
 
 /////////////////////META DATA //////////////////////////////////////////////
 /** 

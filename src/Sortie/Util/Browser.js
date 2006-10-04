@@ -8,13 +8,19 @@
 
 if(!Sortie.Util) Sortie.Util = {};
 
-/**
- * Namespace: Sortie.Util.Browser
- */
 if(!Sortie.Util.Browser) Sortie.Util.Browser = {};
 
 /**
- * Variable: SysBrowser.safari 
+ * Class: Browser
+ * Basic browser sniffer. At present, You do not need to create an instance of
+ * this. All items are boolean properties
+ *
+ * Namespace:
+ * 	Sortie.Util
+ */
+
+/**
+ * Variable: Browser.Safari 
  * 	boolean for is safari 
  */
 Sortie.Util.Browser.Safari = (
@@ -22,7 +28,7 @@ Sortie.Util.Browser.Safari = (
 );
 
 /**
- * Variable: Sortie.Util.Browser.Gecko 
+ * Variable: Browser.Gecko 
  * 	boolean for is gecko 
  */
 Sortie.Util.Browser.Gecko = (
@@ -30,7 +36,7 @@ Sortie.Util.Browser.Gecko = (
 );
 
 /**
- * Variable: Sortie.Util.Browser.Explore 
+ * Variable: Browser.Explorer
  * 	boolean for is internet explorer 
  */
 Sortie.Util.Browser.Explorer = (
@@ -38,7 +44,7 @@ Sortie.Util.Browser.Explorer = (
 );
 
 /**
- * Variable: Sortie.Util.Browser.Opera 
+ * Variable: Browser.Opera 
  * 	boolean for is opera 
  */
 Sortie.Util.Browser.Opera = (
@@ -46,7 +52,7 @@ Sortie.Util.Browser.Opera = (
 );
 
 /**
- * Variable: Sortie.Util.Browser.Windows 
+ * Variable: Browser.Windows 
  * 	boolean for is windows 
  */
 Sortie.Util.Browser.Windows = (
@@ -54,7 +60,7 @@ Sortie.Util.Browser.Windows = (
 );
 
 /**
- * Variable: Sortie.Util.Browser.Mac 
+ * Variable: Browser.Mac 
  * 	boolean for is mac 
  */
 Sortie.Util.Browser.Mac = (
@@ -62,7 +68,7 @@ Sortie.Util.Browser.Mac = (
 );
 
 /** 
- * Variable: Sortie.Util.Browser.Linux 
+ * Variable: Browser.Linux 
  * 	boolean for is linux 
  */
 Sortie.Util.Browser.Linux = (
@@ -70,7 +76,7 @@ Sortie.Util.Browser.Linux = (
 );
 
 /**
- * Variable: Sortie.Util.Browser.Unix 
+ * Variable: Browser.Unix 
  * 	boolean for is unix 
  */
 Sortie.Util.Browser.Unix = (

@@ -8,8 +8,11 @@
 if(!Sortie.Util) Sortie.Util = {};
 
 /**
- * Class: Sortie.Util.Cookie
+ * Class: Cookie
  * Cookie access and manipulation class
+ *
+ * Namespace:
+ * 	Sortie.Util
  */
 Sortie.Util.Cookie = function() {
 	/**
@@ -41,7 +44,7 @@ Sortie.Util.Cookie = function() {
 	
 	
 	/**
-	 * Function: setCookie
+	 * Method: Cookie.SetCookie
 	 * sets a value in a cookie
 	 *
 	 * Parameters:
@@ -63,7 +66,7 @@ Sortie.Util.Cookie = function() {
 	};
 	
 	/**
-	 * Function: removeCookie
+	 * Method: Cookie.RemoveCookie
 	 * Removes a cookie (sets the expires to the past really)
 	 * 
 	 * Parameters:
@@ -80,7 +83,7 @@ Sortie.Util.Cookie = function() {
 	};
 	
 	/**
-	 * Function: setPermCookie
+	 * Method: Cookie.SetPermCookie
 	 * sets a cookie that will last 20 years
 	 * 
 	 * Parameters:
@@ -111,7 +114,7 @@ Sortie.Util.Cookie = function() {
 
 /////////////////////META DATA //////////////////////////////////////////////
 /** 
- * Variable: Sortie.Util.Sort.VERSION 
+ * Variable: Sortie.Util.Cookie.VERSION 
  * 	the current version 
  */
 Sortie.Util.Cookie["VERSION"] = "0.5";

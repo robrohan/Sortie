@@ -1,23 +1,29 @@
 /**
  * File: Util/Text.js
- * Output text functions used by the console and the log
+ * General Output text functions 
  *
  * Copyright: 
  * 	2004-2006 Rob Rohan (robrohan@gmail.com) All rights reserved
- *
  */
 if(!Sortie.Util) Sortie.Util = {};
 
+/**
+ * Class: Text
+ * General Output text functions
+ *
+ * Namespace:
+ * 	Sortie.Util
+ */
 Sortie.Util.Text = function() {
 	/**
-	 * Variables: NEWLINE
-	 * 	the default new line character to add to strings made by the system
-	 * (default [br])
+	 * Variables: Text.NEWLINE
+	 * 	the default new line character to add to strings made by 
+	 * this class (default [\n])
 	 */
 	this.NEWLINE = "\n";
 	
 	/**
-	 * Function: XmlFormat
+	 * Method: Text.XmlFormat
 	 * Escapes the basic bad xml characters from a string
 	 *
 	 * Parameters:
@@ -33,6 +39,17 @@ Sortie.Util.Text = function() {
 		return str;
 	};
 	
+	/**
+	 * Method: Text.UnXmlFormat
+	 * does the reverse of XmlFormat. unescapes xml
+	 * characters
+	 *
+	 * Parameters:
+	 * 	str - the string to process
+	 *
+	 * Returns:
+	 * text with amp and lt replced with & and < etc."
+	 */
 	this.UnXmlFormat = function(str) {
 		var clean = str.replace(/&nbsp;/g," ");
 		clean = clean.replace(/&lt;/g,"<");
@@ -42,8 +59,9 @@ Sortie.Util.Text = function() {
 	}
 	
 	/**
-	 * Function: ParseBoolean
+	 * Method: Text.ParseBoolean
 	 * looks at a string and guesses if its a true or false value
+	 * works with items like "TRUE",etc
 	 *
 	 * Parameters:
 	 * 	str - boolean string 
@@ -61,8 +79,9 @@ Sortie.Util.Text = function() {
 	};
 	
 	/**
-	 * Function: neuro_Reflect
-	 * shows information about an object - lists functions and variables
+	 * Method: Text.Reflect
+	 * shows information about an object - lists functions and variables in
+	 * a displayable form
 	 *
 	 * Parameters:
 	 * 	obj - the object
@@ -82,7 +101,7 @@ Sortie.Util.Text = function() {
 	};
 	
 	/**
-	 * Function: ExpandError
+	 * Method: Text.ExpandError
 	 * Takes an error object and gives a bit more description. Some browers show more info
 	 * then others...
 	 *
@@ -111,5 +130,4 @@ Sortie.Util.Text = function() {
  */
 Sortie.Util.Text["VERSION"] = "0.1";
 ///////////////////////////////////////////////////////////////////////////
-
 
