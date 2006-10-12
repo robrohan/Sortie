@@ -90,10 +90,10 @@ Sortie.Util.Text = function() {
 	 * 	a string representation of the object
 	 */
 	this.Reflect = function(obj) {
-		var str = NEWLINE + "(" + typeof obj + ")";
+		var str = this.NEWLINE + "(" + typeof obj + ")";
 		for(var i in obj) {
 			if(i.toString().charAt(0) != "_") {
-				str += NEWLINE + typeof obj[i] + " :: " + i;
+				str += this.NEWLINE + typeof obj[i] + " :: " + i;
 			}
 		}
 		
@@ -112,13 +112,13 @@ Sortie.Util.Text = function() {
 	 * 	the expanded object in a printable string
 	 */
 	this.ExpandError = function(e) {
-		var stamp = NEWLINE
-		stamp += "Name: "    + e.name + NEWLINE;
-		stamp += "Desc: "    + e.description + NEWLINE;
-		stamp += "Number: "  + e.number + NEWLINE;
-		stamp += "Message: " + e.message + NEWLINE;
-		stamp += "Proto: "   + e.prototype + NEWLINE;
-		stamp += "Const: "   + e.constructor + NEWLINE;
+		var stamp = this.NEWLINE;
+		stamp += "Name: "    + e.name + this.NEWLINE;
+		stamp += "Desc: "    + e.description + this.NEWLINE;
+		stamp += "Number: "  + e.number + this.NEWLINE;
+		stamp += "Message: " + e.message + this.NEWLINE;
+		stamp += "Proto: "   + e.prototype + this.NEWLINE;
+		stamp += "Const: "   + e.constructor + this.NEWLINE;
 		return stamp;
 	}
 }
