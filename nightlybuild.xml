@@ -22,13 +22,13 @@
 	<property name="version_seed"  value="20060407" />
 	<property name="zip_full_name" value="${project_name}_${major_version}.zip" />
 	
-	<property name="repo.path" value="https://svn.sourceforge.net/svnroot/neuromancer" />
+	<property name="repo.path" value="https://svn2.cvsdude.com/robrohan/Neuromancer" />
 	<!-- trunk, branches, tags + version or whatever -->
 	<property name="repo.version" value="trunk" />
 	<property name="repo.username" value="" />
 	<property name="repo.password" value="" />
 	
-	<property name="ssh.server" value="neuromancer.sf.net" />
+	<property name="ssh.server" value="sortie.robrohan.com" />
 	<property name="ssh.username" value="${repo.username}" />
 	<property name="ssh.password" value="${repo.password}" />
 	<property name="ssh.offsetdir" value="www4" />
