@@ -19,7 +19,7 @@
 	<property name="nd.code_dir" value="src" />
 	<property name="nd.work_dir" value="doc_working" />
 	
-	<property name="project.fullpath" value="/Users/Rohan/Documents/workspace/Neuromancer" />
+	<property name="project.fullpath" value="/Users/robrohan/Documents/workspace/Neuromancer" />
 	
 	<!-- Compression input and output paths (must be absolute). The script is a 
 		bash shell script so Mac and Linux should work right off, but other people might
